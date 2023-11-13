@@ -1,6 +1,6 @@
 CREATE TABLE Clientes (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    idPedido BIGINT NOT NULL,
+    idPedido BIGINT NULL,
     nome VARCHAR(255) NOT NULL,
     cpf VARCHAR(11) NOT NULL,
     email VARCHAR(255) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE Pedidos (
 
 CREATE TABLE Produtos (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    idPedido BIGINT NOT NULL,
+    idPedido BIGINT NULL,
     idEstoque BIGINT NOT NULL,
     nome VARCHAR(255) NOT NULL,
     descricao VARCHAR(255) NOT NULL,
@@ -39,7 +39,6 @@ CREATE TABLE Orcamentos (
     data DATE NOT NULL,
     valorTotal DECIMAL(10,2) NOT NULL,
     idPedido BIGINT NOT NULL,
-    idCliente BIGINT NOT NULL,
     idCliente BIGINT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (idCliente) REFERENCES Clientes (id)
