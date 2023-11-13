@@ -1,5 +1,6 @@
-package br.com.cavaleirosDaNoite.Dominio.Entidades;
+package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 
+import java.util.Date;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
