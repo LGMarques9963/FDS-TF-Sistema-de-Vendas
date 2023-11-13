@@ -1,5 +1,3 @@
-package br.com.cavaleirosDaNoite.Dominio.Entidades;
-
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
@@ -12,50 +10,39 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.FetchType;
 
 @Entity
-public class Pedido {
+public class Estoque {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private Date data;
-    private double valorTotal;
+    private int quantidade;
     private long idProduto;
-    private long idOrcamento;
-    private long idCliente;
 
-    public Pedido(long id, Date data, double valorTotal, long idProduto, long idOrcamento, long idCliente) {
+
+    public Estoque(long id, int quantidade, long idProduto) {
         this.id = id;
-        this.data = data;
-        this.valorTotal = valorTotal;
+        this.quantidade = quantidade;
         this.idProduto = idProduto;
-        this.idOrcamento = idOrcamento;
-        this.idCliente = idCliente;
     }
-
-    protected Pedido() {
+    
+    protected Estoque() {
     }
 
     public long getId() {
         return id;
     }
 
-    public Date getData() {
-        return data;
-    }
-
-    public double getValorTotal() {
-        return valorTotal;
+    public int getQuantidade() {
+        return quantidade;
     }
 
     public long getIdProduto() {
         return idProduto;
     }
 
-    public long getIdOrcamento() {
-        return idOrcamento;
+    @Override
+    public String toString() {
+        return "Estoque [id=" + id + ", quantidade=" + quantidade + ", idProduto=" + idProduto + "]";
     }
 
-    public long getIdCliente() {
-        return idCliente;
-    }
     
 }

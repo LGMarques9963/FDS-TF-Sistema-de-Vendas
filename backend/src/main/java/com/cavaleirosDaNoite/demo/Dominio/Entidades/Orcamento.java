@@ -11,51 +11,44 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.FetchType;
 
-@Entity
-public class Pedido {
+public class Orcamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private Date data;
     private double valorTotal;
-    private long idProduto;
-    private long idOrcamento;
     private long idCliente;
+    private long idPedido;
+    private date data;
 
-    public Pedido(long id, Date data, double valorTotal, long idProduto, long idOrcamento, long idCliente) {
+    public Orcamento(long id, double valorTotal, long idCliente, long idPedido, date data) {
         this.id = id;
-        this.data = data;
         this.valorTotal = valorTotal;
-        this.idProduto = idProduto;
-        this.idOrcamento = idOrcamento;
         this.idCliente = idCliente;
+        this.idPedido = idPedido;
+        this.data = data;
     }
 
-    protected Pedido() {
+    protected Orcamento() {
     }
 
     public long getId() {
         return id;
     }
 
-    public Date getData() {
-        return data;
-    }
-
     public double getValorTotal() {
         return valorTotal;
-    }
-
-    public long getIdProduto() {
-        return idProduto;
-    }
-
-    public long getIdOrcamento() {
-        return idOrcamento;
     }
 
     public long getIdCliente() {
         return idCliente;
     }
-    
+
+    public long getIdPedido() {
+        return idPedido;
+    }
+
+    public date getData() {
+        return data;
+    }
+
 }
