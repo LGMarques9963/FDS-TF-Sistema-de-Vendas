@@ -1,4 +1,4 @@
-package br.com.cavaleirosDaNoite.Dominio.Entidades;
+package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 
 
 import java.util.Set;
@@ -63,5 +63,5 @@ public class Produto {
         return "Produto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", valor=" + valor + ", idEstoque=" + idEstoque + ", idPedido=" + idPedido + "]";
     }
 
-    
+
 }

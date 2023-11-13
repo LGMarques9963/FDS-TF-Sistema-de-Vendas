@@ -1,4 +1,4 @@
-package br.com.cavaleirosDaNoite.Dominio.Entidades;
+package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

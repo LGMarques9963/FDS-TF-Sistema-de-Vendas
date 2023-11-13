@@ -1,3 +1,5 @@
+package com.cavaleirosDaNoite.demo.Dominio.Entidades;
+
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
@@ -44,5 +46,5 @@ public class Estoque {
         return "Estoque [id=" + id + ", quantidade=" + quantidade + ", idProduto=" + idProduto + "]";
     }
 
-    
+
 }

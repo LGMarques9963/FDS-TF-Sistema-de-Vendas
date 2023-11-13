@@ -1,5 +1,6 @@
-package br.com.cavaleirosDaNoite.Dominio.Entidades;
+package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 
+import java.util.Date;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
@@ -18,9 +19,9 @@ public class Orcamento {
     private double valorTotal;
     private long idCliente;
     private long idPedido;
-    private date data;
+    private Date data;
 
-    public Orcamento(long id, double valorTotal, long idCliente, long idPedido, date data) {
+    public Orcamento(long id, double valorTotal, long idCliente, long idPedido, Date data) {
         this.id = id;
         this.valorTotal = valorTotal;
         this.idCliente = idCliente;
@@ -47,7 +48,7 @@ public class Orcamento {
         return idPedido;
     }
 
-    public date getData() {
+    public Date getData() {
         return data;
     }
 
