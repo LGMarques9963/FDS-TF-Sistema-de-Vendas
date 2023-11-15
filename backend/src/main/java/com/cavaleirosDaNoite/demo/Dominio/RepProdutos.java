@@ -30,6 +30,13 @@ public class RepProdutos {
         return (List<Produto>) produtoRepository.findAll();
     }
 
+    public Produto save(Produto produto) {
+        return produtoRepository.save(produto);
+    }
+
+    public void deleteById(long id) {
+        produtoRepository.deleteById(id);
+    }
 
 
     // Adicione outras consultas conforme necessário

@@ -1,39 +1,19 @@
 package com.cavaleirosDaNoite.demo.Interface;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import com.cavaleirosDaNoite.demo.Dominio.Entidades.Cliente;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 @RestController
 @RequestMapping("/api")
 public class MainController {
-    
+
     @Autowired
     public MainController(){
 
     }
-
-
-    // lISTAR PRODUTOS
-    @GetMapping("/produtos")
-    @CrossOrigin("*")
-    public String getProdutos(){
-        return "Lista de produtos - Verbo GET";
-    }
-
-    // ADICIONAR PRODUTOS
-    @PostMapping("/produtos")
-    @CrossOrigin("*")
-    public String postProdutos(){
-        return "Adicionando produtos - Verbo POST";
-    }
-
 
     // GERAR ORÇAMENTO
     @PostMapping("/orcamentos")
@@ -61,20 +41,6 @@ public class MainController {
     @CrossOrigin("*")
     public String putOrcamentos(){
         return "Efetivando orçamento - Verbo PUT";
-    }
-
-    // CADASTRAR CLIENTE
-    @PostMapping("/clientes")
-    @CrossOrigin("*")
-    public String postClientes(){
-        return "Cadastrando cliente - Verbo POST";
-    }
-
-    // LISTAR CLIENTES
-    @GetMapping("/clientes")
-    @CrossOrigin("*")
-    public String getClientes(){
-        return "Listando clientes - Verbo GET";
     }
 
     // GERAR PEDIDO

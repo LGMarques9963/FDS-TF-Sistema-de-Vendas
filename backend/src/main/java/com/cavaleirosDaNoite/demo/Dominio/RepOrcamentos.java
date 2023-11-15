@@ -24,8 +24,8 @@ public class RepOrcamentos {
     }
 
     // Adicione outras consultas conforme necessário OrcamentoRepository
-    public Iterable<Orcamento> findAll() {
-        return orcamentoRepository.findAll();
+    public List<Orcamento> findAll() {
+        return (List<Orcamento>) orcamentoRepository.findAll();
     }
     public Optional<Orcamento> findById(long id) { // Procurar pela Id
 
@@ -60,5 +60,17 @@ public class RepOrcamentos {
         // Determinar os dias de validade com base nos períodos de baixa procura
         List<String> periodosBaixaProcura = Arrays.asList("07", "12", "01", "02");
         return periodosBaixaProcura.contains(orcamento.getData().getMonth()) ? 35 : 21;
+    }
+
+    public List<Orcamento> findByVencidoTrue() {
+        return (List<Orcamento>) orcamentoRepository.findByVencidoTrue();
+    }
+
+    public List<Orcamento> findByVencidoFalse() {
+        return (List<Orcamento>) orcamentoRepository.findByVencidoFalse();
+    }
+
+    public Orcamento save(Orcamento orcamento) {
+        return orcamentoRepository.save(orcamento);
     }
 }

@@ -11,4 +11,8 @@ public interface IRepOrcamento extends CrudRepository<Orcamento, Long> {
     Orcamento findByClienteId(long idCliente);
 
     List<Orcamento> findByDataBeforeAndVencidoFalse(LocalDate dataAtual);
+
+    Object findByVencidoTrue();
+
+    Object findByVencidoFalse();
 }
