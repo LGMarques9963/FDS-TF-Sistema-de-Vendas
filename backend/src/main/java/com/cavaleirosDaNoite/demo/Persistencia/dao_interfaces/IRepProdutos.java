@@ -1,4 +1,4 @@
-package com.cavaleirosDaNoite.demo.Persistencia.dao;
+package com.cavaleirosDaNoite.demo.Persistencia.dao_interfaces;
 
 import org.springframework.data.repository.CrudRepository;
 

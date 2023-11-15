@@ -20,6 +20,10 @@ public class Cliente {
     private String cpf;
     private String email;
     private String senha;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idCliente")
+    @JsonManagedReference
+    private Set<Pedido> pedidos;
 
     public Cliente(long id, String nome, String cpf, String email, String senha) {
         this.id = id;
@@ -33,12 +37,8 @@ public class Cliente {
     protected Cliente() {
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id")
-    @JsonManagedReference
-    private Set<Pedido> pedidos;
 
-    private Set<Pedido> getPedidos() {
+    public Set<Pedido> getPedidos() {
         return pedidos;
     }
 

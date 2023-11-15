@@ -19,6 +19,11 @@ public class Estoque {
     private int quantidade;
 
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "estoque_id")
+    @JsonManagedReference
+    private Set<Produto> produtos;
+
     public Estoque(long id, int quantidade, long idProduto) {
         this.id = id;
         this.quantidade = quantidade;
