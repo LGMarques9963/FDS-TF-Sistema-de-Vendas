@@ -36,4 +36,11 @@ public class RepPedidos {
         return (List<Pedido>) pedidoRepository.findAll();
     }
 
+    public Pedido save(Pedido pedido) {
+        return pedidoRepository.save(pedido);
+    }
+
+    public void deleteById(long id) {
+        pedidoRepository.deleteById(id);
+    }
 }
