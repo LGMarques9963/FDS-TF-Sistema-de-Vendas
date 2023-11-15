@@ -31,5 +31,11 @@ public class RepClientes {
         return (List<Cliente>) clienteRepository.findAll();
     }
 
+    public void save(Cliente cliente) {
+    }
+
+    public void deleteById(long id) {
+    }
+
     // Implemente outros métodos de consulta, se necessário
 }
