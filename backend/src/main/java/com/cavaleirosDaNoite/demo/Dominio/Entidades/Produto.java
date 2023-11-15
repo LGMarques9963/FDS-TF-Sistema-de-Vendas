@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.FetchType;
 
+@Entity(name = "Produtos")
 public class Produto {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,15 +21,13 @@ public class Produto {
     private String descricao;
     private double valor;
     private long idEstoque;
-    private long idPedido;
 
-    public Produto(long id, String nome, String descricao, double valor, long idEstoque, long idPedido) {
+    public Produto(long id, String nome, String descricao, double valor, long idEstoque) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.valor = valor;
         this.idEstoque = idEstoque;
-        this.idPedido = idPedido;
     }
 
     protected Produto() {
@@ -54,13 +53,10 @@ public class Produto {
         return idEstoque;
     }
 
-    public long getIdPedido(){
-        return idPedido;
-    }
 
     @Override
     public String toString() {
-        return "Produto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", valor=" + valor + ", idEstoque=" + idEstoque + ", idPedido=" + idPedido + "]";
+        return "Produto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", valor=" + valor + ", idEstoque=" + idEstoque + "]";
     }
 
 
