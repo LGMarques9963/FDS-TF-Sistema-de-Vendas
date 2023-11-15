@@ -30,7 +30,6 @@ public class RepClientes {
 
         return (List<Cliente>) clienteRepository.findAll();
     }
-
     public void deleteById(long id) {
         clienteRepository.deleteById(id);
     }
