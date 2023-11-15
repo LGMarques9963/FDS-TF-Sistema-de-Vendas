@@ -44,6 +44,17 @@ INSERT INTO Pedidos (data, idProduto, idCliente) VALUES ('2021-01-08', 8, 8);
 INSERT INTO Pedidos (data, idProduto, idCliente) VALUES ('2021-01-09', 9, 9);
 INSERT INTO Pedidos (data, idProduto, idCliente) VALUES ('2021-01-10', 10, 10);
 
+INSERT INTO ItemPedido (idPedido, idProduto, quantidade) VALUES (1, 1, 1);
+INSERT INTO ItemPedido (idPedido, idProduto, quantidade) VALUES (2, 2, 2);
+INSERT INTO ItemPedido (idPedido, idProduto, quantidade) VALUES (2, 3, 3);
+INSERT INTO ItemPedido (idPedido, idProduto, quantidade) VALUES (5, 4, 4);
+INSERT INTO ItemPedido (idPedido, idProduto, quantidade) VALUES (5, 5, 5);
+INSERT INTO ItemPedido (idPedido, idProduto, quantidade) VALUES (7, 6, 6);
+INSERT INTO ItemPedido (idPedido, idProduto, quantidade) VALUES (7, 7, 7);
+INSERT INTO ItemPedido (idPedido, idProduto, quantidade) VALUES (8, 8, 8);
+INSERT INTO ItemPedido (idPedido, idProduto, quantidade) VALUES (8, 9, 9);
+INSERT INTO ItemPedido (idPedido, idProduto, quantidade) VALUES (10, 10, 10);
+
 
 INSERT INTO Orcamentos (data, valorTotal, imposto, desconto, idPedido, idCliente, efetivado) VALUES ('2021-01-01', 100.00, 10.00, 0.00, 1, 1, true);
 INSERT INTO Orcamentos (data, valorTotal, imposto, desconto, idPedido, idCliente, efetivado) VALUES ('2021-01-02', 200.00, 20.00, 0.00, 2, 2, true);

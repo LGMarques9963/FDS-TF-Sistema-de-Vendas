@@ -29,6 +29,15 @@ CREATE TABLE Pedidos (
     FOREIGN KEY (idProduto) REFERENCES Produtos(id)
 );
 
+CREATE TABLE ItemPedido(
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    idPedido BIGINT NOT NULL,
+    idProduto BIGINT NOT NULL,
+    quantidade INT NOT NULL,
+    FOREIGN KEY (idPedido) REFERENCES Pedidos(id),
+    FOREIGN KEY (idProduto) REFERENCES Produtos(id)
+)
+
 CREATE TABLE Orcamentos (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     data DATE NOT NULL,

@@ -1,6 +1,8 @@
 package com.cavaleirosDaNoite.demo.Dominio;
 import com.cavaleirosDaNoite.demo.Persistencia.dao_interfaces.IRepEstoque;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Estoque;
+import com.cavaleirosDaNoite.demo.Dominio.Entidades.Produto;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -33,6 +35,18 @@ public class RepEstoque {
     public List<Estoque> findMinimumByQuantidadeAtualLessThan(int minQuant) { // Procurar quais estão abaixo da quantidade minima
 
         return estoqueRepository.findByQuantidadeAtualLessThan(minQuant);
+    }
+
+
+    public void cadastrarProduto(Produto produto) {
+    }
+
+
+    public void removerProduto(Produto produto) {
+    }
+
+
+    public void atualizarProduto(Produto produto) {
     }
 
     // Adicione outras consultas conforme necessário
