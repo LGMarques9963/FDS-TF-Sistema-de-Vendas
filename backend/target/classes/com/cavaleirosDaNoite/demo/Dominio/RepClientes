@@ -1,0 +1,27 @@
+package com.cavaleirosDaNoite.demo.Dominio;
+
+import java.util.List;
+
+public class RepClientes {
+    private final IRepClientes clienteRepository;
+
+    // Injeção de dependência do IRepClientes
+
+    @Autowired
+    public RepClientes(IRepClientes clienteRepository) {
+        this.clienteRepository = clienteRepository;
+    }
+
+    // Adicione outras consultas conforme necessário
+
+
+    public Cliente findById(long id) {  // Procurar pela Id
+        return clienteRepository.findById(id);
+    }
+
+    public List<Cliente> findAll() { //  Listar todos
+        return clienteRepository.findAll();
+    }
+
+    // Implemente outros métodos de consulta, se necessário
+}
