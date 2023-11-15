@@ -56,6 +56,4 @@ public class Cliente {
         return "Cliente [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", senha=" + senha
                 + ", pedidos=" + pedidos + "]";
     }
-
-
 }
