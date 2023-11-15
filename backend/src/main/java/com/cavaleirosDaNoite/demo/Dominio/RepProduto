@@ -1,0 +1,28 @@
+package com.cavaleirosDaNoite.demo.Dominio;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class RepProdutos {
+    private final IRepProdutos produtoRepository;
+
+    @Autowired
+    public RepProdutos(IRepProdutos produtoRepository) {
+        this.produtoRepository = produtoRepository;
+    }
+
+    // Restante da sua lógica aqui
+
+
+    public Produto findById(long id) { // Procurar pela Id 
+        return produtoRepository.findById(id);
+    }
+
+    public List<Produto> findAll() {// Listar todos
+        return produtoRepository.findAll();
+    }
+
+
+
+    // Adicione outras consultas conforme necessário
+}

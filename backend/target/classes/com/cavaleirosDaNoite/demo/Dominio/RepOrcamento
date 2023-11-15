@@ -1,0 +1,54 @@
+package com.cavaleirosDaNoite.demo.Dominio;
+import java.time.LocalDate;
+import java.util.stream.Collectors;
+
+import java.util.List;
+
+public class RepOrcamentos {
+    private final IRepOrcamentos orcamentoRepository;
+
+    // Injeção de dependência do IRepOrcamentos
+
+    @Autowired
+    public RepOrcamentos(IRepOrcamentos orcamentoRepository) {
+        this.orcamentoRepository = orcamentoRepository;
+    }
+
+    // Adicione outras consultas conforme necessário OrcamentoRepository
+    public List<Orcamento> findAll() {
+        return orcamentoRepository.findAll();
+    }
+    public Orcamento findById(long id) { // Procurar pela Id
+        return orcamentoRepository.findById(id);
+    }
+
+    public Orcamento findByIdCliente(long idCliente) {  // Procurar pela Id do cliente
+        return orcamentoRepository.findByIdCliente(idCliente);
+    }
+
+   public List<Orcamento> findVencidos() { //Procura todos que estão vencidos baseado na data atual
+        // Obter a data atual
+        LocalDate dataAtual = LocalDate.now();
+
+        // Consultar orçamentos vencidos
+        List<Orcamento> orcamentosVencidos = orcamentoRepository.findByDataBeforeAndVencidoFalse(dataAtual);
+
+        // Considerar a validade específica dos orçamentos
+        // Acredito que essa parte nem vai acabar ficando aqui no código final
+        return orcamentosVencidos.stream()
+                .filter(this::isOrcamentoValido)
+                .collect(Collectors.toList());
+    }
+
+    private boolean isOrcamentoValido(Orcamento orcamento) {
+        // Lógica para verificar a validade dos orçamentos com base na regra do enunciado
+        LocalDate dataValidade = orcamento.getData().plusDays(getDiasValidade(orcamento));
+        return dataValidade.isAfter(LocalDate.now());
+    }
+
+    private int getDiasValidade(Orcamento orcamento) {
+        // Determinar os dias de validade com base nos períodos de baixa procura
+        List<String> periodosBaixaProcura = Arrays.asList("07", "12", "01", "02");
+        return periodosBaixaProcura.contains(orcamento.getData().getMonthValue()) ? 35 : 21;
+    }
+}

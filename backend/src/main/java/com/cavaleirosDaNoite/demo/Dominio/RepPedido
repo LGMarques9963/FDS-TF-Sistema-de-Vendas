@@ -1,0 +1,30 @@
+package com.cavaleirosDaNoite.demo.Dominio;
+import java.util.List;
+
+public class RepPedidos {
+    private final IRepPedidos pedidoRepository;
+
+    // Injeção de dependência do IRepPedidos
+
+    @Autowired
+    public RepPedidos(IRepPedidos pedidoRepository) {
+        this.pedidoRepository = pedidoRepository;
+    }
+
+
+
+
+    public Pedido findById(long id) { // Procurar pela Id
+        return pedidoRepository.findById(id);
+    }
+
+    
+    public Pedido findByIdCliente(long idCliente) { // Procurar pela Id do cliente
+        return pedidoRepository.findByIdCliente(idCliente);
+    }
+
+    public List<Pedido> findAll() { // Listar todos
+        return pedidoRepository.findAll();
+    }
+
+}
