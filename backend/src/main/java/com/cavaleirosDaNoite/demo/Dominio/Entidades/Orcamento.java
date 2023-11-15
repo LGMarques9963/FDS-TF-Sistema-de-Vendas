@@ -3,14 +3,7 @@ package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 import java.util.Date;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.*;
 
 @Entity(name = "Orcamentos")
 public class Orcamento {
@@ -25,12 +18,23 @@ public class Orcamento {
     private double desconto;
     private boolean efetivado;
 
-    public Orcamento(long id, double valorTotal, long idCliente, long idPedido, Date data, double imposto,
+    @ManyToOne
+    @JoinColumn(name = "idCliente")
+    @JsonManagedReference
+    private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "idPedido")
+    @JsonManagedReference
+    private Pedido pedido;
+
+
+    public Orcamento(long id, double valorTotal, Cliente cliente, Pedido pedido, Date data, double imposto,
             double desconto, boolean efetivado) {
         this.id = id;
         this.valorTotal = valorTotal;
-        this.idCliente = idCliente;
-        this.idPedido = idPedido;
+        this.cliente = cliente;
+        this.pedido = pedido;
         this.data = data;
         this.imposto = imposto;
         this.desconto = desconto;
@@ -48,12 +52,12 @@ public class Orcamento {
         return valorTotal;
     }
 
-    public long getIdCliente() {
-        return idCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public long getIdPedido() {
-        return idPedido;
+    public Pedido getPedido() {
+        return pedido;
     }
 
     public Date getData() {
@@ -68,7 +72,7 @@ public class Orcamento {
         return desconto;
     }
 
-    public boolean getEfetivado() {
+    public boolean isEfetivado() {
         return efetivado;
     }
 

@@ -1,16 +1,9 @@
 package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 
 import java.util.Date;
-import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.*;
 
 
 @Entity(name = "Pedidos")
@@ -19,14 +12,22 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Date data;
-    private long idProduto;
-    private long idCliente;
 
-    public Pedido(long id, Date data, long idProduto, long idCliente) {
+    @ManyToOne
+    @JoinColumn(name = "idProduto")
+    @JsonManagedReference
+    private Produto produto;
+
+    @ManyToOne
+    @JoinColumn(name = "idCliente")
+    @JsonManagedReference
+    private Cliente cliente;
+
+    public Pedido(long id, Date data, Produto produto, Cliente cliente) {
         this.id = id;
         this.data = data;
-        this.idProduto = idProduto;
-        this.idCliente = idCliente;
+        this.produto = produto;
+        this.cliente = cliente;
     }
 
     protected Pedido() {
@@ -41,13 +42,13 @@ public class Pedido {
     }
 
 
-    public long getIdProduto() {
-        return idProduto;
+    public Produto getProduto() {
+        return produto;
     }
 
 
-    public long getIdCliente() {
-        return idCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
     
 }

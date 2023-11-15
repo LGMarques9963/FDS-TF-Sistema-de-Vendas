@@ -3,14 +3,7 @@ package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.*;
 
 @Entity(name = "Produtos")
 public class Produto {
@@ -20,14 +13,18 @@ public class Produto {
     private String nome;
     private String descricao;
     private double valor;
-    private long idEstoque;
 
-    public Produto(long id, String nome, String descricao, double valor, long idEstoque) {
+    @ManyToOne
+    @JoinColumn(name = "idEstoque")
+    @JsonManagedReference
+    private Estoque estoque;
+
+    public Produto(long id, String nome, String descricao, double valor, Estoque estoque) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.valor = valor;
-        this.idEstoque = idEstoque;
+        this.estoque = estoque;
     }
 
     protected Produto() {
@@ -49,14 +46,14 @@ public class Produto {
         return valor;
     }
 
-    public long getIdEstoque(){
-        return idEstoque;
+    public Estoque getEstoque(){
+        return estoque;
     }
 
 
     @Override
     public String toString() {
-        return "Produto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", valor=" + valor + ", idEstoque=" + idEstoque + "]";
+        return "Produto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", valor=" + valor + ", idEstoque=" + estoque.getId() + "]";
     }
 
 
