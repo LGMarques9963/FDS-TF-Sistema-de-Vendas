@@ -17,49 +17,38 @@ INSERT INTO Clientes (nome, cpf, email, senha) VALUES ('Vinícius Souza', '45678
 INSERT INTO Clientes (nome, cpf, email, senha) VALUES ('Patrícia Lima', '56789012345', 'patricialima@gmail.com', 'plima789');
 INSERT INTO Clientes (nome, cpf, email, senha) VALUES ('Luciano Martins', '67890123456', 'lucianomartins@gmail.com', 'lmartins567');
 INSERT INTO Clientes (nome, cpf, email, senha) VALUES ('Beatriz Pereira', '78901234567', 'beatrizpereira@gmail.com', 'beatriz123');
-INSERT INTO Clientes (nome, cpf, email, senha) VALUES ('Carlos Aquino', '712354398712', 'carlosaquino@gmail.com', 'carlos123');
+INSERT INTO Clientes (nome, cpf, email, senha) VALUES ('Carlos Aquino', '71235439871', 'carlosaquino@gmail.com', 'carlos123');
 
-INSERT INTO Pedidos (data, valorTotal, idProduto, idOrcamento, idCliente) VALUES ('2021-01-01', 100.00, 1, 1, 1);
-INSERT INTO Pedidos (data, valorTotal, idProduto, idOrcamento, idCliente) VALUES ('2021-01-02', 200.00, 2, 2, 2);
-INSERT INTO Pedidos (data, valorTotal, idProduto, idOrcamento, idCliente) VALUES ('2021-01-03', 300.00, 3, 3, 3);
-INSERT INTO Pedidos (data, valorTotal, idProduto, idOrcamento, idCliente) VALUES ('2021-01-04', 400.00, 4, 4, 4);
-INSERT INTO Pedidos (data, valorTotal, idProduto, idOrcamento, idCliente) VALUES ('2021-01-05', 500.00, 5, 5, 5);
-INSERT INTO Pedidos (data, valorTotal, idProduto, idOrcamento, idCliente) VALUES ('2021-01-06', 600.00, 6, 6, 6);
-INSERT INTO Pedidos (data, valorTotal, idProduto, idOrcamento, idCliente) VALUES ('2021-01-07', 700.00, 7, 7, 7);
-INSERT INTO Pedidos (data, valorTotal, idProduto, idOrcamento, idCliente) VALUES ('2021-01-08', 800.00, 8, 8, 8);
-INSERT INTO Pedidos (data, valorTotal, idProduto, idOrcamento, idCliente) VALUES ('2021-01-09', 900.00, 9, 9, 9);
-INSERT INTO Pedidos (data, valorTotal, idProduto, idOrcamento, idCliente) VALUES ('2021-01-10', 1000.00, 10, 10, 10);
+INSERT INTO Estoques (quantidade) VALUES (1);
 
-INSERT INTO Produtos (idPedido, idEstoque, nome, descricao, valor) VALUES (1, 1, 'Produto 1', 'Descrição do Produto 1', 100.00);
-INSERT INTO Produtos (idPedido, idEstoque, nome, descricao, valor) VALUES (2, 2, 'Produto 2', 'Descrição do Produto 2', 200.00);
-INSERT INTO Produtos (idPedido, idEstoque, nome, descricao, valor) VALUES (3, 3, 'Produto 3', 'Descrição do Produto 3', 300.00);
-INSERT INTO Produtos (idPedido, idEstoque, nome, descricao, valor) VALUES (4, 4, 'Produto 4', 'Descrição do Produto 4', 400.00);
-INSERT INTO Produtos (idPedido, idEstoque, nome, descricao, valor) VALUES (5, 5, 'Produto 5', 'Descrição do Produto 5', 500.00);
-INSERT INTO Produtos (idPedido, idEstoque, nome, descricao, valor) VALUES (6, 6, 'Produto 6', 'Descrição do Produto 6', 600.00);
-INSERT INTO Produtos (idPedido, idEstoque, nome, descricao, valor) VALUES (7, 7, 'Produto 7', 'Descrição do Produto 7', 700.00);
-INSERT INTO Produtos (idPedido, idEstoque, nome, descricao, valor) VALUES (8, 8, 'Produto 8', 'Descrição do Produto 8', 800.00);
-INSERT INTO Produtos (idPedido, idEstoque, nome, descricao, valor) VALUES (9, 9, 'Produto 9', 'Descrição do Produto 9', 900.00);
-INSERT INTO Produtos (idPedido, idEstoque, nome, descricao, valor) VALUES (10, 10, 'Produto 10', 'Descrição do Produto 10', 1000.00);
-INSERT INTO Produtos (idPedido, idEstoque, nome, descricao, valor) VALUES (11, 11, 'Produto 11', 'Descrição do Produto 11', 1100.00);
-INSERT INTO Produtos (idPedido, idEstoque, nome, descricao, valor) VALUES (12, 12, 'Produto 12', 'Descrição do Produto 12', 1200.00);
-INSERT INTO Produtos (idPedido, idEstoque, nome, descricao, valor) VALUES (13, 13, 'Produto 13', 'Descrição do Produto 13', 1300.00);
-INSERT INTO Produtos (idPedido, idEstoque, nome, descricao, valor) VALUES (14, 14, 'Produto 14', 'Descrição do Produto 14', 1400.00);
-INSERT INTO Produtos (idPedido, idEstoque, nome, descricao, valor) VALUES (15, 15, 'Produto 15', 'Descrição do Produto 15', 1500.00);
-
-INSERT INTO Orcamentos (data, valorTotal, idPedido, idCliente) VALUES ('2021-01-01', 100.00, 1, 1);
-INSERT INTO Orcamentos (data, valorTotal, idPedido, idCliente) VALUES ('2021-01-02', 200.00, 2, 2);
-INSERT INTO Orcamentos (data, valorTotal, idPedido, idCliente) VALUES ('2021-01-03', 300.00, 3, 3);
-INSERT INTO Orcamentos (data, valorTotal, idPedido, idCliente) VALUES ('2021-01-04', 400.00, 4, 4);
-INSERT INTO Orcamentos (data, valorTotal, idPedido, idCliente) VALUES ('2021-01-05', 500.00, 5, 5);
-INSERT INTO Orcamentos (data, valorTotal, idPedido, idCliente) VALUES ('2021-01-06', 600.00, 6, 6);
-INSERT INTO Orcamentos (data, valorTotal, idPedido, idCliente) VALUES ('2021-01-07', 700.00, 7, 7);
-INSERT INTO Orcamentos (data, valorTotal, idPedido, idCliente) VALUES ('2021-01-08', 800.00, 8, 8);
-INSERT INTO Orcamentos (data, valorTotal, idPedido, idCliente) VALUES ('2021-01-09', 900.00, 9, 9);
-INSERT INTO Orcamentos (data, valorTotal, idPedido, idCliente) VALUES ('2021-01-10', 1000.00, 10, 10);
+INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 1', 1, 'Descrição do Produto 1', 100.00);
+INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 2', 1, 'Descrição do Produto 2', 200.00);
+INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 3', 1, 'Descrição do Produto 3', 300.00);
+INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 4', 1, 'Descrição do Produto 4', 400.00);
+INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 5', 1, 'Descrição do Produto 5', 500.00);
+INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 6', 1, 'Descrição do Produto 6', 600.00);
+INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 7', 1, 'Descrição do Produto 7', 700.00);
+INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 8', 1, 'Descrição do Produto 8', 800.00);
+INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 9', 1, 'Descrição do Produto 9', 900.00);
+INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 10', 1, 'Descrição do Produto 10', 1000.00);
 
 
-INSERT INTO Estoques (quantidade, idProduto) VALUES (1, 1);
-INSERT INTO Estoques (quantidade, idProduto) VALUES (2, 2);
-INSERT INTO Estoques (quantidade, idProduto) VALUES (3, 3);
-INSERT INTO Estoques (quantidade, idProduto) VALUES (4, 4);
-INSERT INTO Estoques (quantidade, idProduto) VALUES (5, 5);
+INSERT INTO Pedidos (data, idProduto, idCliente) VALUES ('2021-01-01', 1, 1);
+INSERT INTO Pedidos (data, idProduto, idCliente) VALUES ('2021-01-02', 2, 2);
+INSERT INTO Pedidos (data, idProduto, idCliente) VALUES ('2021-01-03', 3, 3);
+INSERT INTO Pedidos (data, idProduto, idCliente) VALUES ('2021-01-04', 4, 4);
+INSERT INTO Pedidos (data, idProduto, idCliente) VALUES ('2021-01-05', 5, 5);
+INSERT INTO Pedidos (data, idProduto, idCliente) VALUES ('2021-01-06', 6, 6);
+INSERT INTO Pedidos (data, idProduto, idCliente) VALUES ('2021-01-07', 7, 7);
+INSERT INTO Pedidos (data, idProduto, idCliente) VALUES ('2021-01-08', 8, 8);
+INSERT INTO Pedidos (data, idProduto, idCliente) VALUES ('2021-01-09', 9, 9);
+INSERT INTO Pedidos (data, idProduto, idCliente) VALUES ('2021-01-10', 10, 10);
+
+
+INSERT INTO Orcamentos (data, valorTotal, imposto, desconto, idPedido, idCliente, efetivado) VALUES ('2021-01-01', 100.00, 10.00, 0.00, 1, 1, true);
+INSERT INTO Orcamentos (data, valorTotal, imposto, desconto, idPedido, idCliente, efetivado) VALUES ('2021-01-02', 200.00, 20.00, 0.00, 2, 2, true);
+INSERT INTO Orcamentos (data, valorTotal, imposto, desconto, idPedido, idCliente, efetivado) VALUES ('2021-01-03', 300.00, 30.00, 0.00, 3, 3, true);
+INSERT INTO Orcamentos (data, valorTotal, imposto, desconto, idPedido, idCliente, efetivado) VALUES ('2021-01-04', 400.00, 40.00, 0.00, 4, 4, true);
+INSERT INTO Orcamentos (data, valorTotal, imposto, desconto, idPedido, idCliente, efetivado) VALUES ('2021-01-05', 500.00, 50.00, 0.00, 5, 5, true);
+
+
