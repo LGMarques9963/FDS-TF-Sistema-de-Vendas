@@ -3,7 +3,9 @@ package com.cavaleirosDaNoite.demo.Dominio;
 import java.util.List;
 
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Cliente;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ServicoCliente {
     RepClientes repClientes;
 

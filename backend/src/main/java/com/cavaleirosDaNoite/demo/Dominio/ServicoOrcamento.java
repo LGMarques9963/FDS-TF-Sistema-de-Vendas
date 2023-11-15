@@ -4,15 +4,21 @@ import com.cavaleirosDaNoite.demo.Dominio.Entidades.Cliente;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Orcamento;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Pedido;
 import com.cavaleirosDaNoite.demo.Dominio.CalculadoraDescontoValidade;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
+
+@Service
 public class ServicoOrcamento { 
 
     CalculadoraDescontoValidade calculadora;
-    PedidoService pedidoService;
+    ServicoPedido pedidoService;
     RepOrcamentos repOrcamentos;
     
     @Autowired
-    public ServicoOrcamento(CalculadoraDescontoValidade calculadora, PedidoService pedidoService, RepOrcamentos repOrcamentos) {
+    public ServicoOrcamento(CalculadoraDescontoValidade calculadora, ServicoPedido pedidoService, RepOrcamentos repOrcamentos) {
         this.calculadora = calculadora;
         this.pedidoService = pedidoService;
         this.repOrcamentos = repOrcamentos;
@@ -23,8 +29,8 @@ public class ServicoOrcamento {
         double valorPedido = pedidoService.calcularSomatorioItensPedido(pedido.getId()); 
         double desconto = calculadora.calcularDesconto(valorPedido, cliente);
         double valorFinal = valorPedido - (valorPedido * imposto) - desconto;
+        LocalDate data = LocalDate.now();
 
-        Orcamento orcamento = new Orcamento(valorFinal, pedido, cliente);
         return repOrcamentos.save(orcamento);
 
 
