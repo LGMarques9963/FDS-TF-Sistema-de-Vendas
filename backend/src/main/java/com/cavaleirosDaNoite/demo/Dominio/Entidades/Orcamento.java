@@ -11,8 +11,6 @@ public class Orcamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private double valorTotal;
-    private long idCliente;
-    private long idPedido;
     private Date data;
     private double imposto;
     private double desconto;

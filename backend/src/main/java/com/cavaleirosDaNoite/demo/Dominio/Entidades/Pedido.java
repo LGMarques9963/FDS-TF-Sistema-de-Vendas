@@ -1,6 +1,8 @@
 package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -13,21 +15,19 @@ public class Pedido {
     private long id;
     private Date data;
 
-    @ManyToOne
-    @JoinColumn(name = "idProduto")
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Produto produto;
+    private List<ItemPedido> itens;
 
     @ManyToOne
     @JoinColumn(name = "idCliente")
     @JsonManagedReference
     private Cliente cliente;
 
-    public Pedido(long id, Date data, Produto produto, Cliente cliente) {
-        this.id = id;
+    public Pedido(Date data, Cliente cliente, List<ItemPedido> itens) {
         this.data = data;
-        this.produto = produto;
         this.cliente = cliente;
+        this.itens = itens;
     }
 
     protected Pedido() {
@@ -42,13 +42,23 @@ public class Pedido {
     }
 
 
-    public Produto getProduto() {
-        return produto;
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void adicionarItem(ItemPedido item) {
+        itens.add(item);
+        item.setPedido(this);
+    }
+
+    public void removerItem(ItemPedido item) {
+        itens.remove(item);
+        item.setPedido(null);
     }
 
 
     public Cliente getCliente() {
         return cliente;
     }
-    
+
 }
