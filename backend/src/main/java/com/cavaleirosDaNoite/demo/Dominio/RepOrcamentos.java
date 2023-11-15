@@ -32,8 +32,8 @@ public class RepOrcamentos {
         return orcamentoRepository.findById(id);
     }
 
-    public Optional<Orcamento> findByClienteId(long idCliente) {  // Procurar pela Id do cliente
-        return Optional.ofNullable(orcamentoRepository.findByClienteId(idCliente));
+    public List<Orcamento> findByClienteId(long idCliente) {  // Procurar pela Id do cliente
+        return (List<Orcamento>) orcamentoRepository.findByClienteId(idCliente);
     }
 
    public List<Orcamento> findVencidos() { //Procura todos que estão vencidos baseado na data atual
