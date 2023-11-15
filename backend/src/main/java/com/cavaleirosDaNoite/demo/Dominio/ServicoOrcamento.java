@@ -3,6 +3,9 @@ package com.cavaleirosDaNoite.demo.Dominio;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Cliente;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Orcamento;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Pedido;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.cavaleirosDaNoite.demo.Dominio.CalculadoraDescontoValidade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
