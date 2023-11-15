@@ -11,28 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MainController {
 
     @Autowired
-    private ServicoCliente servicoCliente;
-
-    @Autowired
     public MainController(){
 
     }
-
-
-    // lISTAR PRODUTOS
-    @GetMapping("/produtos")
-    @CrossOrigin("*")
-    public String getProdutos(){
-        return "Lista de produtos - Verbo GET";
-    }
-
-    // ADICIONAR PRODUTOS
-    @PostMapping("/produtos")
-    @CrossOrigin("*")
-    public String postProdutos(){
-        return "Adicionando produtos - Verbo POST";
-    }
-
 
     // GERAR ORÇAMENTO
     @PostMapping("/orcamentos")
@@ -60,21 +41,6 @@ public class MainController {
     @CrossOrigin("*")
     public String putOrcamentos(){
         return "Efetivando orçamento - Verbo PUT";
-    }
-
-    // CADASTRAR CLIENTE
-    @PostMapping("/clientes")
-    @CrossOrigin("*")
-    public ResponseEntity<String> postClientes(@RequestBody Cliente cliente){
-        servicoCliente.createCliente(cliente);
-        return ResponseEntity.ok("Cliente cadastrado com sucesso!");
-    }
-
-    // LISTAR CLIENTES
-    @GetMapping("/clientes")
-    @CrossOrigin("*")
-    public String getClientes(){
-        return "Listando clientes - Verbo GET";
     }
 
     // GERAR PEDIDO
