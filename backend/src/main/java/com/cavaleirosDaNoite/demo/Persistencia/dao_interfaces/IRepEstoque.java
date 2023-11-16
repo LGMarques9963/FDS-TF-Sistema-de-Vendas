@@ -9,5 +9,5 @@ import java.util.List;
 public interface
 IRepEstoque extends CrudRepository<Estoque, Long> {
 
-    List<Estoque> findByQuantidadeAtualLessThan(int minQuant);
+    List<Estoque> findByQuantidadeLessThan(int minQuant);
 }

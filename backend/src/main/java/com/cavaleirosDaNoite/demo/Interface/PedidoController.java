@@ -1,8 +1,10 @@
 package com.cavaleirosDaNoite.demo.Interface;
 
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Pedido;
-import com.cavaleirosDaNoite.demo.Dominio.RepPedidos;
+import com.cavaleirosDaNoite.demo.Dominio.ServicoPedido;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,47 +13,50 @@ import java.util.List;
 @RequestMapping("/api/pedidos")
 public class PedidoController {
 
-    private final RepPedidos repPedidos;
+    private final ServicoPedido servicoPedido;
 
     @Autowired
-    public PedidoController(RepPedidos repPedidos) {
-        this.repPedidos = repPedidos;
+    public PedidoController(ServicoPedido servicoPedido) {
+        this.servicoPedido = servicoPedido;
     }
 
     @GetMapping
     @CrossOrigin("*")
     public List<Pedido> getPedidos() {
-        return repPedidos.findAll();
+        return servicoPedido.listarPedidos();
     }
 
     @GetMapping("/{id}")
     @CrossOrigin("*")
     public Pedido getPedidoById(long id) {
-        return repPedidos.findById(id).orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+        return servicoPedido.buscarPedido(id);
     }
 
     @GetMapping("/cliente/{idCliente}")
     @CrossOrigin("*")
     public List<Pedido> getPedidoByIdCliente(@PathVariable long idCliente) {
-        return repPedidos.findByClienteId(idCliente);
+        return servicoPedido.buscarPedidoCliente(idCliente);
     }
 
     @PostMapping
     @CrossOrigin("*")
-    public Pedido postPedido(@RequestBody Pedido pedido) {
-        return repPedidos.save(pedido);
+    public ResponseEntity<String> postPedido(@RequestBody Pedido pedido) {
+
+        servicoPedido.cadastrarPedido(pedido);
+        return ResponseEntity.ok("Pedido cadastrado com sucesso!");
     }
 
     @PutMapping("/{id}")
     @CrossOrigin("*")
-    public Pedido putPedido(@RequestBody Pedido pedido, @PathVariable long id) {
-        if (repPedidos.findById(id).isEmpty()) { return null; }
-        return repPedidos.save(pedido);
+    public ResponseEntity<String> putPedido(@RequestBody Pedido pedido, @PathVariable long id) {
+        if (servicoPedido.buscarPedidoCliente(id).isEmpty()) { return null; }
+            servicoPedido.cadastrarPedido(pedido);
+            return ResponseEntity.ok("Pedido atualizado com sucesso!");
     }
 
     @DeleteMapping("/{id}")
     @CrossOrigin("*")
     public void deletePedido(@PathVariable long id) {
-        repPedidos.deleteById(id);
+        servicoPedido.removerPedido(id);
     }
 }

@@ -1,5 +1,6 @@
 package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -11,7 +12,7 @@ public class Orcamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private double valorTotal;
-    private Date data;
+    private LocalDate data;
     private double imposto;
     private double desconto;
     private boolean efetivado;
@@ -27,7 +28,7 @@ public class Orcamento {
     private Pedido pedido;
 
 
-    public Orcamento(long id, double valorTotal, Cliente cliente, Pedido pedido, Date data, double imposto,
+    public Orcamento(long id, double valorTotal, Cliente cliente, Pedido pedido, LocalDate data, double imposto,
             double desconto, boolean efetivado) {
         this.id = id;
         this.valorTotal = valorTotal;
@@ -39,7 +40,7 @@ public class Orcamento {
         this.efetivado = efetivado;
     }
 
-    protected Orcamento() {
+    public Orcamento() {
     }
 
     public long getId() {
@@ -58,7 +59,7 @@ public class Orcamento {
         return pedido;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
@@ -74,4 +75,31 @@ public class Orcamento {
         return efetivado;
     }
 
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setValorTotal(double valorPedido) {
+        this.valorTotal = valorPedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public void setData(LocalDate now) {
+        this.data = now;
+    }
+
+    public void setImposto(double imposto) {
+        this.imposto = imposto;
+    }
+
+    public void setDesconto(double desconto) {
+        this.desconto = desconto;
+    }
+
+    public void setEfetivado(boolean b) {
+        this.efetivado = b;
+    }
 }

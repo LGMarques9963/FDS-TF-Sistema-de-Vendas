@@ -34,9 +34,5 @@ public class ServicoPedido {
         return repPedidos.findByClienteId(idCliente);
     }
 
-    public double calcularSomatorioItensPedido(long id){
-        Pedido pedido = repPedidos.findById(id).orElse(null);
-        double somatorio = pedido.getItens().stream().mapToDouble(ItemPedido::getValor).sum();
-        return somatorio;
-    }
+
 }
