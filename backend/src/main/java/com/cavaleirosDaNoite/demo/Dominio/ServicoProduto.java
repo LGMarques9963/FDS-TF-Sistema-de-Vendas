@@ -1,25 +1,37 @@
 package com.cavaleirosDaNoite.demo.Dominio;
 
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Produto;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+@Service
 public class ServicoProduto {
     
-    RepEstoque repEstoque;
+    private final RepProdutos repProdutos;
 
-    public ServicoProduto(RepEstoque repEstoque){
-        this.repEstoque = repEstoque;
+    public ServicoProduto(RepProdutos repProdutos){
+        this.repProdutos = repProdutos;
     }
 
     public void cadastrarProduto(Produto produto){
-        repEstoque.cadastrarProduto(produto);
+        repProdutos.save(produto);
     }
 
     public void removerProduto(Produto produto){
-        repEstoque.removerProduto(produto);
+        repProdutos.deleteById(produto.getId());
     }
 
     public void atualizarProduto(Produto produto){
-        repEstoque.atualizarProduto(produto);
+        repProdutos.save(produto);
+    }
+
+    public Produto buscarProduto(long id){
+        return repProdutos.findById(id).orElse(null);
+    }
+
+    public List<Produto> listarProdutos(){
+        return repProdutos.findAll();
     }
 
 }

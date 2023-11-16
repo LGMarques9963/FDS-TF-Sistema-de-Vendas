@@ -2,7 +2,9 @@ package com.cavaleirosDaNoite.demo.Interface;
 
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Produto;
 import com.cavaleirosDaNoite.demo.Dominio.RepProdutos;
+import com.cavaleirosDaNoite.demo.Dominio.ServicoProduto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,42 +13,44 @@ import java.util.List;
 @RequestMapping("/api/produtos")
 public class ProdutoController {
 
-    private final RepProdutos repProdutos;
+    private final ServicoProduto servicoProduto;
 
     @Autowired
-    public ProdutoController(RepProdutos repProdutos) {
-        this.repProdutos = repProdutos;
+    public ProdutoController(ServicoProduto servicoProduto) {
+        this.servicoProduto = servicoProduto;
     }
 
     @GetMapping
     @CrossOrigin("*")
     public List<Produto> getProdutos() {
-        return repProdutos.findAll();
+        return servicoProduto.listarProdutos();
     }
 
     @GetMapping("/{id}")
     @CrossOrigin("*")
     public Produto getProdutoById(long id) {
-        return repProdutos.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+        return servicoProduto.buscarProduto(id);
     }
 
     @PostMapping
     @CrossOrigin("*")
-    public Produto postProduto(@RequestBody Produto produto) {
-        return repProdutos.save(produto);
+    public ResponseEntity<String> postProduto(@RequestBody Produto produto) {
+        servicoProduto.cadastrarProduto(produto);
+        return ResponseEntity.ok("Produto cadastrado com sucesso!");
     }
 
     @PutMapping("/{id}")
     @CrossOrigin("*")
-    public Produto putProduto(@RequestBody Produto produto, @PathVariable long id) {
-        if (repProdutos.findById(id).isEmpty()) { return null; }
-        return repProdutos.save(produto);
+    public ResponseEntity<String> putProduto(@RequestBody Produto produto, @PathVariable long id) {
+        if (servicoProduto.buscarProduto(id)==null) { return null; }
+            servicoProduto.cadastrarProduto(produto);
+            return ResponseEntity.ok("Produto atualizado com sucesso!");
     }
 
     @DeleteMapping("/{id}")
     @CrossOrigin("*")
     public void deleteProduto(@PathVariable long id) {
-        repProdutos.deleteById(id);
+        servicoProduto.removerProduto(servicoProduto.buscarProduto(id));
     }
 
 }

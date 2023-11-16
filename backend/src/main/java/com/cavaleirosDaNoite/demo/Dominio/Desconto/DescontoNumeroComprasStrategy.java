@@ -3,10 +3,11 @@ package com.cavaleirosDaNoite.demo.Dominio.Desconto;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Cliente;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Orcamento;
 import com.cavaleirosDaNoite.demo.Dominio.RepOrcamentos;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-
+@Component
 public class DescontoNumeroComprasStrategy implements DescontoStrategy {
     private RepOrcamentos repOrcamentos;
     @Override

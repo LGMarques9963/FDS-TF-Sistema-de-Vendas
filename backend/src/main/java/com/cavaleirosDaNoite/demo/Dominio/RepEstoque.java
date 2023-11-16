@@ -34,7 +34,7 @@ public class RepEstoque {
 
     public List<Estoque> findMinimumByQuantidadeAtualLessThan(int minQuant) { // Procurar quais estão abaixo da quantidade minima
 
-        return estoqueRepository.findByQuantidadeAtualLessThan(minQuant);
+        return estoqueRepository.findByQuantidadeLessThan(minQuant);
     }
 
 
