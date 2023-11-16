@@ -16,8 +16,9 @@ public class ServicoCliente {
     }
 
 
-    public void cadastrarCliente(Cliente cliente) {
+    public Cliente cadastrarCliente(Cliente cliente) {
         repClientes.save(cliente);
+        return cliente;
     }
 
     public void removerCliente(long id) {

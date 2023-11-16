@@ -19,6 +19,7 @@ INSERT INTO Clientes (nome, cpf, email, senha) VALUES ('Luciano Martins', '67890
 INSERT INTO Clientes (nome, cpf, email, senha) VALUES ('Beatriz Pereira', '78901234567', 'beatrizpereira@gmail.com', 'beatriz123');
 INSERT INTO Clientes (nome, cpf, email, senha) VALUES ('Carlos Aquino', '71235439871', 'carlosaquino@gmail.com', 'carlos123');
 
+
 INSERT INTO Estoques (quantidade) VALUES (1);
 
 INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 1', 1, 'Descrição do Produto 1', 100.00);
