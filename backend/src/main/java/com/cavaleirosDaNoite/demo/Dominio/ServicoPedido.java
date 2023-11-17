@@ -4,6 +4,7 @@ import com.cavaleirosDaNoite.demo.Dominio.Entidades.ItemPedido;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Pedido;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 
 @Service
@@ -14,7 +15,8 @@ public class ServicoPedido {
         this.repPedidos = repPedidos;
     }
 
-    public void cadastrarPedido(Pedido pedido) {
+    public void cadastrarPedido(List<ItemPedido> produtos, long idCliente) {
+
         repPedidos.save(pedido);
     }
 

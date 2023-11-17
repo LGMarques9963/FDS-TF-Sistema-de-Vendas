@@ -62,5 +62,8 @@ INSERT INTO Orcamentos (data, valorTotal, imposto, desconto, idPedido, idCliente
 INSERT INTO Orcamentos (data, valorTotal, imposto, desconto, idPedido, idCliente, efetivado) VALUES ('2021-01-03', 300.00, 30.00, 0.00, 3, 3, true);
 INSERT INTO Orcamentos (data, valorTotal, imposto, desconto, idPedido, idCliente, efetivado) VALUES ('2021-01-04', 400.00, 40.00, 0.00, 4, 4, true);
 INSERT INTO Orcamentos (data, valorTotal, imposto, desconto, idPedido, idCliente, efetivado) VALUES ('2021-01-05', 500.00, 50.00, 0.00, 5, 5, true);
+INSERT INTO Orcamentos (data, valorTotal, imposto, desconto, idPedido, idCliente, efetivado) VALUES ('2023-12-06', 600.00, 60.00, 0.00, 6, 6, true);
+INSERT INTO Orcamentos (data, valorTotal, imposto, desconto, idPedido, idCliente, efetivado) VALUES ('2023-12-07', 700.00, 70.00, 0.00, 7, 1, true);
+
 
 

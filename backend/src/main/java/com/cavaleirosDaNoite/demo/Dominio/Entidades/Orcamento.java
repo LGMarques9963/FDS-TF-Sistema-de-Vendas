@@ -102,4 +102,8 @@ public class Orcamento {
     public void setEfetivado(boolean b) {
         this.efetivado = b;
     }
+
+    public String toString() {
+        return "Orcamento{" + "id=" + id + ", valorTotal=" + valorTotal + ", cliente=" + cliente + ", pedido=" + pedido + ", data=" + data + ", imposto=" + imposto + ", desconto=" + desconto + ", efetivado=" + efetivado + '}';
+    }
 }

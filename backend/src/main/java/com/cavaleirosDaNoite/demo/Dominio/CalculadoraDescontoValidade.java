@@ -14,14 +14,16 @@ import java.time.LocalDate;
 public class CalculadoraDescontoValidade {
     private final DescontoStrategy descontoNumeroComprasStrategy;
     private final DescontoStrategy descontoValorMedioStrategy;
-    private ValidadeStrategy validadeStrategy;
+    private final ValidadeStrategy validadeStrategy;
 
     @Autowired
     public CalculadoraDescontoValidade(
             @Qualifier("descontoNumeroComprasStrategy") DescontoStrategy descontoNumeroComprasStrategy,
-            @Qualifier("descontoValorMedioStrategy") DescontoStrategy descontoValorMedioStrategy) {
+            @Qualifier("descontoValorMedioStrategy") DescontoStrategy descontoValorMedioStrategy,
+            ValidadeStrategy validadeStrategy) {
         this.descontoNumeroComprasStrategy = descontoNumeroComprasStrategy;
         this.descontoValorMedioStrategy = descontoValorMedioStrategy;
+        this.validadeStrategy = validadeStrategy;
     }
 
     public double calcularDesconto(double valor, Cliente cliente) {

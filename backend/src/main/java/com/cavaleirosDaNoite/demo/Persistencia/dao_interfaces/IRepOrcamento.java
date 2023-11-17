@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IRepOrcamento extends CrudRepository<Orcamento, Long> {
 
-    Orcamento findByClienteId(long idCliente);
+    List<Orcamento> findByClienteId(long idCliente);
 
 
 }

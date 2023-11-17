@@ -20,7 +20,7 @@ public class Estoque {
 
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "estoque_id")
+    @JoinColumn(name = "idEstoque")
     @JsonManagedReference
     private Set<Produto> produtos;
 
