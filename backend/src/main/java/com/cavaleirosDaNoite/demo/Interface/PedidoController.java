@@ -1,5 +1,6 @@
 package com.cavaleirosDaNoite.demo.Interface;
 
+import com.cavaleirosDaNoite.demo.Aplicacao.PedidoRequest;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.ItemPedido;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Pedido;
 import com.cavaleirosDaNoite.demo.Dominio.ServicoPedido;
@@ -44,20 +45,22 @@ public class PedidoController {
 
     @PostMapping
     @CrossOrigin("*")
-    public ResponseEntity<String> postPedido(@RequestBody List<String> itemPedido) {
-        List<ItemPedido> itemPedido2 = new ArrayList<>();
-        for (String item : itemPedido) {
-            itemPedido2.add(new ItemPedido(item));
+    public ResponseEntity<Pedido> postPedido(@RequestBody PedidoRequest pedidoRequest) {
+        System.out.println(pedidoRequest);
+        try{
+            Pedido pedido = servicoPedido.cadastrarPedido(pedidoRequest);
+            return ResponseEntity.ok(pedido);
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
         }
-        servicoPedido.cadastrarPedido(pedido);
-        return ResponseEntity.ok("Pedido cadastrado com sucesso!");
     }
 
     @PutMapping("/{id}")
     @CrossOrigin("*")
     public ResponseEntity<String> putPedido(@RequestBody Pedido pedido, @PathVariable long id) {
         if (servicoPedido.buscarPedidoCliente(id).isEmpty()) { return null; }
-            servicoPedido.cadastrarPedido(pedido);
+//            servicoPedido.cadastrarPedido(pedido);
             return ResponseEntity.ok("Pedido atualizado com sucesso!");
     }
 

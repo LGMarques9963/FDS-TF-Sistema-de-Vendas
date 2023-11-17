@@ -46,17 +46,6 @@ public class Pedido {
         return itens;
     }
 
-    public void adicionarItem(ItemPedido item) {
-        itens.add(item);
-        item.setPedido(this);
-    }
-
-    public void removerItem(ItemPedido item) {
-        itens.remove(item);
-        item.setPedido(null);
-    }
-
-
     public Cliente getCliente() {
         return cliente;
     }
