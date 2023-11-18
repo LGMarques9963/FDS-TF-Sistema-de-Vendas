@@ -31,7 +31,7 @@ public class ClientesInadiplentes {
 
     }
 
-    public Map<Cliente, Long> clientesEQuantidadeOrcamentosNaoEfetivados() {
+    public Map<Cliente, Long> clientesInadiplentes() {
         return reporcamentos.findAll().stream()
                 .filter(orcamento -> !orcamento.isEfetivado())
                 .collect(Collectors.groupingBy(Orcamento::getCliente, Collectors.counting()));
