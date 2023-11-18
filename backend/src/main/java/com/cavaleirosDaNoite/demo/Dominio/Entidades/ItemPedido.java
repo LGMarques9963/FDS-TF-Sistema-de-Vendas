@@ -1,5 +1,6 @@
 package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -11,25 +12,27 @@ public class ItemPedido {
 
     @ManyToOne
     @JoinColumn(name = "idProduto")
-    @JsonManagedReference
+    @JsonBackReference
     private Produto produto;
 
     @ManyToOne
     @JoinColumn(name = "idPedido")
-    @JsonManagedReference
+    @JsonBackReference
     private Pedido pedido;
 
     private int quantidade;
 
-    public ItemPedido(long id, Produto produto, int quantidade) {
+    public ItemPedido(long id, Produto produto, int quantidade, Pedido pedido) {
         this.id = id;
         this.produto = produto;
         this.quantidade = quantidade;
+        this.pedido = pedido;
     }
 
     public ItemPedido(Produto produto, int quantidade) {
         this.produto = produto;
         this.quantidade = quantidade;
+        produto.adicionarItemPedido(this);
     }
 
     protected ItemPedido() {
@@ -69,4 +72,11 @@ public class ItemPedido {
     }
 
 
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
 }

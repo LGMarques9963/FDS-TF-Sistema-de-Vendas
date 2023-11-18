@@ -6,6 +6,7 @@ import com.cavaleirosDaNoite.demo.Dominio.Entidades.Pedido;
 import com.cavaleirosDaNoite.demo.Dominio.ServicoPedido;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,8 +34,9 @@ public class PedidoController {
 
     @GetMapping("/{id}")
     @CrossOrigin("*")
-    public Pedido getPedidoById(@PathVariable long id) {
-        return servicoPedido.buscarPedido(id);
+    public ResponseEntity<Pedido> getPedidoById(@PathVariable long id) {
+
+        return ResponseEntity.ok(servicoPedido.buscarPedido(id));
     }
 
     @GetMapping("/cliente/{idCliente}")
@@ -46,22 +48,22 @@ public class PedidoController {
     @PostMapping
     @CrossOrigin("*")
     public ResponseEntity<Pedido> postPedido(@RequestBody PedidoRequest pedidoRequest) {
-        System.out.println(pedidoRequest);
-        try{
+        try {
             Pedido pedido = servicoPedido.cadastrarPedido(pedidoRequest);
             return ResponseEntity.ok(pedido);
-
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(null);
+            // Log detalhado da exceção para fins de depuração
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
     @PutMapping("/{id}")
     @CrossOrigin("*")
-    public ResponseEntity<String> putPedido(@RequestBody Pedido pedido, @PathVariable long id) {
-        if (servicoPedido.buscarPedidoCliente(id).isEmpty()) { return null; }
-//            servicoPedido.cadastrarPedido(pedido);
-            return ResponseEntity.ok("Pedido atualizado com sucesso!");
+    public ResponseEntity<?> putPedido(@RequestBody PedidoRequest pedidoRequest, @PathVariable long id) {
+        if (servicoPedido.buscarPedido(id) == null) { return ResponseEntity.badRequest().body("Pedido não encontrado!"); }
+            Pedido pedidoAtualizado = servicoPedido.atualizarPedido(pedidoRequest, id);
+            return ResponseEntity.ok(pedidoAtualizado);
     }
 
     @DeleteMapping("/{id}")

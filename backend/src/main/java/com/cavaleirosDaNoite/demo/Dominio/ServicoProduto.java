@@ -2,7 +2,9 @@ package com.cavaleirosDaNoite.demo.Dominio;
 
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Estoque;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Produto;
+import jakarta.persistence.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,6 +46,7 @@ public class ServicoProduto {
 
     }
 
+    @EntityGraph(attributePaths = {"estoque", "estoque.quantidade"})
     public Produto buscarProduto(long id){
         return repProdutos.findById(id).orElse(null);
     }
