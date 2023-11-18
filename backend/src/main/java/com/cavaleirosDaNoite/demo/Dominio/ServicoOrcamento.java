@@ -19,15 +19,16 @@ public class ServicoOrcamento {
     CalculadoraDescontoValidade calculadora;
     RepPedidos repPedidos;
     RepOrcamentos repOrcamentos;
-    
+
     @Autowired
-    public ServicoOrcamento(CalculadoraDescontoValidade calculadora, RepPedidos repPedidos, RepOrcamentos repOrcamentos) {
+    public ServicoOrcamento(CalculadoraDescontoValidade calculadora, RepPedidos repPedidos,
+            RepOrcamentos repOrcamentos) {
         this.calculadora = calculadora;
         this.repPedidos = repPedidos;
         this.repOrcamentos = repOrcamentos;
     }
-    
-    public Orcamento solicitarOrcamento(Pedido pedido, Cliente cliente){
+
+    public Orcamento solicitarOrcamento(Pedido pedido, Cliente cliente) {
         double imposto = 0.10;
         double valorPedido = calcularSomatorioItensPedido(pedido.getId());
         double desconto = calculadora.calcularDesconto(valorPedido, cliente);
@@ -44,39 +45,42 @@ public class ServicoOrcamento {
         return repOrcamentos.save(orcamento);
     }
 
-    public double calcularSomatorioItensPedido(long id){
+    public double calcularSomatorioItensPedido(long id) {
         Pedido pedido = repPedidos.findById(id).orElse(null);
         double somatorio = pedido.getItens().stream().mapToDouble(ItemPedido::getValor).sum();
         return somatorio;
     }
 
-    public List<Orcamento> orcamentosVencidos(){
+    public List<Orcamento> orcamentosVencidos() {
         List<Orcamento> orcamentos = repOrcamentos.findAll();
-        return orcamentos.stream().filter(orcamento -> calculadora.calcularPrazoValidade(orcamento).isBefore(LocalDate.now())).collect(Collectors.toList());
+        return orcamentos.stream()
+                .filter(orcamento -> calculadora.calcularPrazoValidade(orcamento).isBefore(LocalDate.now()))
+                .collect(Collectors.toList());
 
     }
 
-    public List<Orcamento> orcamentosValidos(){
+    public List<Orcamento> orcamentosValidos() {
         List<Orcamento> orcamentos = repOrcamentos.findAll();
-        return orcamentos.stream().filter(orcamento -> calculadora.calcularPrazoValidade(orcamento).isAfter(LocalDate.now())).collect(Collectors.toList());
+        return orcamentos.stream()
+                .filter(orcamento -> calculadora.calcularPrazoValidade(orcamento).isAfter(LocalDate.now()))
+                .collect(Collectors.toList());
 
     }
 
-    public List<Orcamento> orcamentosCliente(long idCliente){
+    public List<Orcamento> orcamentosCliente(long idCliente) {
         return repOrcamentos.findByClienteId(idCliente);
     }
 
-    public Orcamento buscarOrcamento(long id){
+    public Orcamento buscarOrcamento(long id) {
         return repOrcamentos.findById(id).orElse(null);
     }
 
-    public void atualizarOrcamento(Orcamento orcamento){
+    public void atualizarOrcamento(Orcamento orcamento) {
         repOrcamentos.save(orcamento);
     }
 
-    public List<Orcamento> listarOrcamentos(){
+    public List<Orcamento> listarOrcamentos() {
         return repOrcamentos.findAll();
     }
-    
+
 }
- 
