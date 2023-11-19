@@ -1,6 +1,9 @@
 package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 
+import java.util.List;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -14,6 +17,10 @@ public class Cliente {
     private String cpf;
     private String email;
     private String senha;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Pedido> pedidos;
 
     public Cliente(long id, String nome, String cpf, String email, String senha) {
         this.id = id;
@@ -73,5 +80,8 @@ public class Cliente {
         this.id = id;
     }
 
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
 
 }

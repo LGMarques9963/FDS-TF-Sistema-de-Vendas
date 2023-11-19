@@ -30,10 +30,8 @@ CREATE TABLE IF NOT EXISTS Produtos (
 CREATE TABLE IF NOT EXISTS Pedidos (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     data DATE NOT NULL,
-    idProduto BIGINT NOT NULL,
     idCliente BIGINT NOT NULL,
-    FOREIGN KEY (idCliente) REFERENCES Clientes(id),
-    FOREIGN KEY (idProduto) REFERENCES Produtos(id)
+    FOREIGN KEY (idCliente) REFERENCES Clientes(id)
 );
 
 CREATE TABLE IF NOT EXISTS ItemPedido(

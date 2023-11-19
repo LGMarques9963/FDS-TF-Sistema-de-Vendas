@@ -20,10 +20,7 @@ public class RepPedidos {
     }
 
 
-
-
     public Optional<Pedido> findById(long id) { // Procurar pela Id
-
         return pedidoRepository.findById(id);
     }
 

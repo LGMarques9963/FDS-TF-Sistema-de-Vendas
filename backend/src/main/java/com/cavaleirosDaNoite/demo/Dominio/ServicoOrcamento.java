@@ -27,8 +27,10 @@ public class ServicoOrcamento {
         this.repPedidos = repPedidos;
         this.repOrcamentos = repOrcamentos;
     }
-
-    public Orcamento solicitarOrcamento(Pedido pedido, Cliente cliente) {
+    
+    public Orcamento solicitarOrcamento(long idPedido){
+        Pedido pedido = repPedidos.findById(idPedido).orElse(null);
+        Cliente cliente = pedido.getCliente();
         double imposto = 0.10;
         double valorPedido = calcularSomatorioItensPedido(pedido.getId());
         double desconto = calculadora.calcularDesconto(valorPedido, cliente);
@@ -75,8 +77,11 @@ public class ServicoOrcamento {
         return repOrcamentos.findById(id).orElse(null);
     }
 
-    public void atualizarOrcamento(Orcamento orcamento) {
+    public Orcamento efetivarOrcamento(long idOrcamento){
+        Orcamento orcamento = repOrcamentos.findById(idOrcamento).orElse(null);
+        orcamento.setEfetivado(true);
         repOrcamentos.save(orcamento);
+        return orcamento;
     }
 
     public List<Orcamento> listarOrcamentos() {

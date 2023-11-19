@@ -1,5 +1,6 @@
 package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 
+import java.util.List;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
@@ -20,9 +21,9 @@ public class Estoque {
 
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "estoque_id")
+    @JoinColumn(name = "idEstoque")
     @JsonManagedReference
-    private Set<Produto> produtos;
+    private List<Produto> produtos;
 
     public Estoque(long id, int quantidade, long idProduto) {
         this.id = id;
@@ -38,6 +39,10 @@ public class Estoque {
 
     public int getQuantidade() {
         return quantidade;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
     }
 
 

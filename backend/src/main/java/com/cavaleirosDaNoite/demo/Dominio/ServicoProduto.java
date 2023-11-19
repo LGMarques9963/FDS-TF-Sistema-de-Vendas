@@ -1,31 +1,52 @@
 package com.cavaleirosDaNoite.demo.Dominio;
 
+import com.cavaleirosDaNoite.demo.Dominio.Entidades.Estoque;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Produto;
+import jakarta.persistence.Entity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ServicoProduto {
-    
+    @Autowired
     private final RepProdutos repProdutos;
 
-    public ServicoProduto(RepProdutos repProdutos){
+    @Autowired
+    private final RepEstoque repEstoque;
+
+    public ServicoProduto(RepProdutos repProdutos, RepEstoque repEstoque){
         this.repProdutos = repProdutos;
+        this.repEstoque = repEstoque;
     }
 
-    public void cadastrarProduto(Produto produto){
+    public Produto cadastrarProduto(Produto produto, long idEstoque){
+        Estoque estoque = repEstoque.findById(idEstoque).orElse(null);
+        produto.setEstoque(estoque);
         repProdutos.save(produto);
+        return produto;
     }
 
     public void removerProduto(Produto produto){
         repProdutos.deleteById(produto.getId());
     }
 
-    public void atualizarProduto(Produto produto){
-        repProdutos.save(produto);
+    public Produto atualizarProduto(Produto produto, long idEstoque, long idProduto){
+        Estoque estoque = repEstoque.findById(idEstoque).orElse(null);
+        Produto produtoAtualizado = repProdutos.findById(idProduto).orElse(null);
+
+        produtoAtualizado.setValor(produto.getValor());
+        produtoAtualizado.setNome(produto.getNome());
+        produtoAtualizado.setDescricao(produto.getDescricao());
+        produtoAtualizado.setEstoque(estoque);
+        repProdutos.save(produtoAtualizado);
+        return produtoAtualizado;
+
     }
 
+    @EntityGraph(attributePaths = {"estoque", "estoque.quantidade"})
     public Produto buscarProduto(long id){
         return repProdutos.findById(id).orElse(null);
     }

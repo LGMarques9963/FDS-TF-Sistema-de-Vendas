@@ -1,7 +1,6 @@
 package com.cavaleirosDaNoite.demo.Interface;
 
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Produto;
-import com.cavaleirosDaNoite.demo.Dominio.RepProdutos;
 import com.cavaleirosDaNoite.demo.Dominio.ServicoProduto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,29 +21,40 @@ public class ProdutoController {
 
     @GetMapping
     @CrossOrigin("*")
-    public List<Produto> getProdutos() {
-        return servicoProduto.listarProdutos();
+    public ResponseEntity<List<Produto>> getProdutos() {
+        try {
+            return ResponseEntity.ok(servicoProduto.listarProdutos());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 
     @GetMapping("/{id}")
     @CrossOrigin("*")
-    public Produto getProdutoById(long id) {
+    public Produto getProdutoById(@PathVariable long id) {
         return servicoProduto.buscarProduto(id);
     }
 
     @PostMapping
     @CrossOrigin("*")
-    public ResponseEntity<String> postProduto(@RequestBody Produto produto) {
-        servicoProduto.cadastrarProduto(produto);
-        return ResponseEntity.ok("Produto cadastrado com sucesso!");
+    public ResponseEntity<String> postProduto(@RequestBody Produto produto, @RequestParam long idEstoque) {
+        try {
+            Produto produtoAtualizado = servicoProduto.cadastrarProduto(produto, idEstoque);
+            return ResponseEntity.ok(produtoAtualizado.toString());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Erro ao cadastrar produto: " + e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
     @CrossOrigin("*")
-    public ResponseEntity<String> putProduto(@RequestBody Produto produto, @PathVariable long id) {
-        if (servicoProduto.buscarProduto(id)==null) { return null; }
-            servicoProduto.cadastrarProduto(produto);
-            return ResponseEntity.ok("Produto atualizado com sucesso!");
+    public ResponseEntity<String> putProduto(@RequestBody Produto produto, @PathVariable long id, @RequestParam long idEstoque) {
+        try {
+            Produto produtoAtualizado = servicoProduto.atualizarProduto(produto, idEstoque, id);
+            return ResponseEntity.ok(produtoAtualizado.toString());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Erro ao cadastrar produto: " + e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
