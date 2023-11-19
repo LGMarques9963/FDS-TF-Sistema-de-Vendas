@@ -1,6 +1,7 @@
 package com.cavaleirosDaNoite.demo.Dominio;
 
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Cliente;
+import com.cavaleirosDaNoite.demo.Dominio.Entidades.ItemEstoque;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.ItemPedido;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Orcamento;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Pedido;
@@ -19,6 +20,7 @@ public class ServicoOrcamento {
     CalculadoraDescontoValidade calculadora;
     RepPedidos repPedidos;
     RepOrcamentos repOrcamentos;
+    RepItemEstoque repItemEstoque;
     
     @Autowired
     public ServicoOrcamento(CalculadoraDescontoValidade calculadora, RepPedidos repPedidos, RepOrcamentos repOrcamentos) {
@@ -54,13 +56,15 @@ public class ServicoOrcamento {
 
     public List<Orcamento> orcamentosVencidos(){
         List<Orcamento> orcamentos = repOrcamentos.findAll();
-        return orcamentos.stream().filter(orcamento -> calculadora.calcularPrazoValidade(orcamento).isBefore(LocalDate.now())).collect(Collectors.toList());
+        return orcamentos.stream().filter(orcamento -> calculadora.calcularPrazoValidade(orcamento)
+        .isBefore(LocalDate.now())).collect(Collectors.toList());
 
     }
 
     public List<Orcamento> orcamentosValidos(){
         List<Orcamento> orcamentos = repOrcamentos.findAll();
-        return orcamentos.stream().filter(orcamento -> calculadora.calcularPrazoValidade(orcamento).isAfter(LocalDate.now())).collect(Collectors.toList());
+        return orcamentos.stream().filter(orcamento -> calculadora.calcularPrazoValidade(orcamento)
+        .isAfter(LocalDate.now())).collect(Collectors.toList());
 
     }
 
@@ -74,9 +78,32 @@ public class ServicoOrcamento {
 
     public Orcamento efetivarOrcamento(long idOrcamento){
         Orcamento orcamento = repOrcamentos.findById(idOrcamento).orElse(null);
-        orcamento.setEfetivado(true);
-        repOrcamentos.save(orcamento);
+        List<ItemPedido> itemPedido = orcamento.getPedido().getItens();
+        List<Boolean> lista = itemPedido.stream().map(item -> {
+            int qtdeEstoque = item.getProduto().getItemEstoque().getQuantidadeAtual();
+            int qtdePedido = item.getQuantidade();
+            return qtdeEstoque >= qtdePedido;
+        }).collect(Collectors.toList());
+        if (lista.contains(false)){
+            throw new RuntimeException("Quantidade de produtos insuficiente no estoque");
+        } else {
+            itemPedido.stream().map(item -> {
+                int qtdeEstoque = item.getProduto().getItemEstoque().getQuantidadeAtual();
+                int qtdePedido = item.getQuantidade();
+                int qtdeAtualizada = qtdeEstoque - qtdePedido;
+                ItemEstoque itemEstoqueAtualizado = item.getProduto().getItemEstoque();
+                itemEstoqueAtualizado.setQuantidadeAtual(qtdeAtualizada);
+                repItemEstoque.save(itemEstoqueAtualizado);
+                return itemEstoqueAtualizado;
+            }).collect(Collectors.toList());
+            orcamento.setEfetivado(true);
+            repOrcamentos.save(orcamento);
+        }
         return orcamento;
+        
+        // orcamento.setEfetivado(true);
+        // repOrcamentos.save(orcamento);
+        // return orcamento;
     }
 
     public List<Orcamento> listarOrcamentos(){

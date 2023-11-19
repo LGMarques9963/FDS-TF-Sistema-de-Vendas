@@ -19,7 +19,6 @@ INSERT INTO Clientes (nome, cpf, email, senha) VALUES ('Luciano Martins', '67890
 INSERT INTO Clientes (nome, cpf, email, senha) VALUES ('Beatriz Pereira', '78901234567', 'beatrizpereira@gmail.com', 'beatriz123');
 INSERT INTO Clientes (nome, cpf, email, senha) VALUES ('Carlos Aquino', '71235439871', 'carlosaquino@gmail.com', 'carlos123');
 
-
 INSERT INTO Estoques (quantidade) VALUES (1);
 
 INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 1', 1, 'Descrição do Produto 1', 100.00);
@@ -32,6 +31,17 @@ INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 7', 1,
 INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 8', 1, 'Descrição do Produto 8', 800.00);
 INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 9', 1, 'Descrição do Produto 9', 900.00);
 INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 10', 1, 'Descrição do Produto 10', 1000.00);
+
+INSERT INTO ItemEstoque (idProduto, idEstoque, quantidadeAtual, quantidadeMax) VALUES (1, 1, 15, 30);
+INSERT INTO ItemEstoque (idProduto, idEstoque, quantidadeAtual, quantidadeMax) VALUES (2, 1, 10, 10);
+INSERT INTO ItemEstoque (idProduto, idEstoque, quantidadeAtual, quantidadeMax) VALUES (3, 1, 18, 20);
+INSERT INTO ItemEstoque (idProduto, idEstoque, quantidadeAtual, quantidadeMax) VALUES (4, 1, 23, 40);
+INSERT INTO ItemEstoque (idProduto, idEstoque, quantidadeAtual, quantidadeMax) VALUES (5, 1, 18, 50);
+INSERT INTO ItemEstoque (idProduto, idEstoque, quantidadeAtual, quantidadeMax) VALUES (6, 1, 54, 55);
+INSERT INTO ItemEstoque (idProduto, idEstoque, quantidadeAtual, quantidadeMax) VALUES (7, 1, 18, 40);
+INSERT INTO ItemEstoque (idProduto, idEstoque, quantidadeAtual, quantidadeMax) VALUES (8, 1, 1, 20);
+INSERT INTO ItemEstoque (idProduto, idEstoque, quantidadeAtual, quantidadeMax) VALUES (9, 1, 12, 30);
+INSERT INTO ItemEstoque (idProduto, idEstoque, quantidadeAtual, quantidadeMax) VALUES (10, 1, 4, 40);
 
 
 INSERT INTO Pedidos (data, idCliente) VALUES ('2021-01-01', 1);
@@ -55,7 +65,6 @@ INSERT INTO ItemPedido (idPedido, idProduto, quantidade) VALUES (7, 7, 7);
 INSERT INTO ItemPedido (idPedido, idProduto, quantidade) VALUES (8, 8, 8);
 INSERT INTO ItemPedido (idPedido, idProduto, quantidade) VALUES (8, 9, 9);
 INSERT INTO ItemPedido (idPedido, idProduto, quantidade) VALUES (10, 10, 10);
-
 
 INSERT INTO Orcamentos (data, valorTotal, imposto, desconto, idPedido, idCliente, efetivado) VALUES ('2021-01-01', 100.00, 10.00, 0.00, 1, 1, true);
 INSERT INTO Orcamentos (data, valorTotal, imposto, desconto, idPedido, idCliente, efetivado) VALUES ('2021-01-02', 200.00, 20.00, 0.00, 2, 2, true);
