@@ -1,15 +1,17 @@
 package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity(name = "Pedidos")
 public class Pedido {
     @Id
@@ -17,7 +19,7 @@ public class Pedido {
     private long id;
     private Date data;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
     @JsonManagedReference
     private List<ItemPedido> itens;
 
@@ -29,10 +31,11 @@ public class Pedido {
     public Pedido(Date data, Cliente cliente, List<ItemPedido> itens) {
         this.data = data;
         this.cliente = cliente;
-        this.itens = itens;
+        this.itens = (itens != null) ? itens : new ArrayList<>();
     }
 
     protected Pedido() {
+        this.itens = new ArrayList<>();
     }
 
     public long getId() {
@@ -57,11 +60,9 @@ public class Pedido {
     }
 
     public void updateItens(List<ItemPedido> itensPedido) {
+        if (this.itens == null) { this.setItens(new ArrayList<>()); }
         this.itens.clear();
-        System.out.println("Itens do pedido: " + this.itens);
-        System.out.println("Itens do pedido: " + itensPedido);
         this.itens.addAll(itensPedido);
-        System.out.println("Itens do pedido: " + this.itens);
     }
 
     public void setCliente(Cliente cliente) {
@@ -75,7 +76,6 @@ public class Pedido {
     public void clearItens() {
         this.itens.clear();
     }
-
 
 
     @Override

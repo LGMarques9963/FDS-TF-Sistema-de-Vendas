@@ -40,6 +40,7 @@ public class ProdutoController {
     @CrossOrigin("*")
     public ResponseEntity<?> postProduto(@RequestBody ProdutoRequest produtoRequest) {
         try {
+            System.out.println("Produto recebido Controller: " + produtoRequest.toString());
             Produto produtoAtualizado = servicoProduto.cadastrarProduto(produtoRequest);
             return ResponseEntity.ok(produtoAtualizado);
         } catch (Exception e) {
@@ -54,7 +55,7 @@ public class ProdutoController {
             Produto produtoAtualizado = servicoProduto.atualizarProduto(produtoRequest, id);
             return ResponseEntity.ok(produtoAtualizado);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Erro ao cadastrar produto: " + e.getMessage());
+            return ResponseEntity.badRequest().body("Erro ao atualizar produto: " + e.getMessage());
         }
     }
 

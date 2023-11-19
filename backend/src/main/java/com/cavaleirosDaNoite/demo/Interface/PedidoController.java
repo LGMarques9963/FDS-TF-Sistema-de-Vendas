@@ -57,8 +57,13 @@ public class PedidoController {
     @CrossOrigin("*")
     public ResponseEntity<?> putPedido(@RequestBody PedidoRequest pedidoRequest, @PathVariable long id) {
         if (servicoPedido.buscarPedido(id) == null) { return ResponseEntity.badRequest().body("Pedido não encontrado!"); }
+        try{
             Pedido pedidoAtualizado = servicoPedido.atualizarPedido(pedidoRequest, id);
-            return ResponseEntity.ok(pedidoAtualizado);
+            return ResponseEntity.ok(pedidoAtualizado.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Erro ao atualizar pedido: " + e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")

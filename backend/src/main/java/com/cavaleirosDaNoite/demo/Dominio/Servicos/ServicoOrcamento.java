@@ -7,7 +7,7 @@ import com.cavaleirosDaNoite.demo.Dominio.Entidades.ItemPedido;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Orcamento;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Pedido;
 
-import com.cavaleirosDaNoite.demo.Dominio.RepItemEstoque;
+import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepItemEstoque;
 import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepOrcamentos;
 import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepPedidos;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,7 +87,7 @@ public class ServicoOrcamento {
         Orcamento orcamento = repOrcamentos.findById(idOrcamento).orElse(null);
         List<ItemPedido> itemPedido = orcamento.getPedido().getItens();
         List<Boolean> lista = itemPedido.stream().map(item -> {
-            int qtdeEstoque = item.getProduto().getItemEstoque().getQuantidadeAtual();
+            int qtdeEstoque = item.getProduto().getItemEstoque().stream().map(itemEstoque -> itemEstoque.getQuantidadeAtual()).findFirst().orElse(null);
             int qtdePedido = item.getQuantidade();
             return qtdeEstoque >= qtdePedido;
         }).collect(Collectors.toList());
@@ -95,14 +95,16 @@ public class ServicoOrcamento {
             throw new RuntimeException("Quantidade de produtos insuficiente no estoque");
         } else {
             itemPedido.stream().map(item -> {
-                int qtdeEstoque = item.getProduto().getItemEstoque().getQuantidadeAtual();
+                int qtdeEstoque = item.getProduto().getItemEstoque().stream().map(itemEstoque -> itemEstoque.getQuantidadeAtual()).findFirst().orElse(null);
                 int qtdePedido = item.getQuantidade();
                 int qtdeAtualizada = qtdeEstoque - qtdePedido;
-                ItemEstoque itemEstoqueAtualizado = item.getProduto().getItemEstoque();
-                itemEstoqueAtualizado.setQuantidadeAtual(qtdeAtualizada);
-                repItemEstoque.save(itemEstoqueAtualizado);
-                return itemEstoqueAtualizado;
-            }).collect(Collectors.toList());
+                item.getProduto().getItemEstoque().stream().map(itemEstoque -> {
+                    itemEstoque.setQuantidadeAtual(qtdeAtualizada);
+                    repItemEstoque.save(itemEstoque);
+                    return itemEstoque;
+                });
+                return null;
+            });
             orcamento.setEfetivado(true);
             repOrcamentos.save(orcamento);
         }
