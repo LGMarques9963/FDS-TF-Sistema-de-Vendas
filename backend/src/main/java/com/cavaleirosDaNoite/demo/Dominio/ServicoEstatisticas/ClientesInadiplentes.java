@@ -20,11 +20,13 @@ import java.util.Map;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Service
 public class ClientesInadiplentes {
 
     RepOrcamentos reporcamentos;
     RepClientes repClientes;
 
+    @Autowired
     public ClientesInadiplentes(RepOrcamentos repOrcamentos, RepClientes repClientes) {
         this.reporcamentos = repOrcamentos;
         this.repClientes = repClientes;
