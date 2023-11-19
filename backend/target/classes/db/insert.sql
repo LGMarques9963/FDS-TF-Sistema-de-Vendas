@@ -21,16 +21,16 @@ INSERT INTO Clientes (nome, cpf, email, senha) VALUES ('Carlos Aquino', '7123543
 
 INSERT INTO Estoques (quantidade) VALUES (1);
 
-INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 1', 1, 'Descrição do Produto 1', 100.00);
-INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 2', 1, 'Descrição do Produto 2', 200.00);
-INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 3', 1, 'Descrição do Produto 3', 300.00);
-INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 4', 1, 'Descrição do Produto 4', 400.00);
-INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 5', 1, 'Descrição do Produto 5', 500.00);
-INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 6', 1, 'Descrição do Produto 6', 600.00);
-INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 7', 1, 'Descrição do Produto 7', 700.00);
-INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 8', 1, 'Descrição do Produto 8', 800.00);
-INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 9', 1, 'Descrição do Produto 9', 900.00);
-INSERT INTO Produtos (nome, idEstoque, descricao, valor) VALUES ('Produto 10', 1, 'Descrição do Produto 10', 1000.00);
+INSERT INTO Produtos (nome, descricao, valor) VALUES ('Produto 1',  'Descrição do Produto 1', 100.00);
+INSERT INTO Produtos (nome, descricao, valor) VALUES ('Produto 2',  'Descrição do Produto 2', 200.00);
+INSERT INTO Produtos (nome, descricao, valor) VALUES ('Produto 3',  'Descrição do Produto 3', 300.00);
+INSERT INTO Produtos (nome, descricao, valor) VALUES ('Produto 4',  'Descrição do Produto 4', 400.00);
+INSERT INTO Produtos (nome, descricao, valor) VALUES ('Produto 5',  'Descrição do Produto 5', 500.00);
+INSERT INTO Produtos (nome, descricao, valor) VALUES ('Produto 6',  'Descrição do Produto 6', 600.00);
+INSERT INTO Produtos (nome, descricao, valor) VALUES ('Produto 7',  'Descrição do Produto 7', 700.00);
+INSERT INTO Produtos (nome, descricao, valor) VALUES ('Produto 8',  'Descrição do Produto 8', 800.00);
+INSERT INTO Produtos (nome, descricao, valor) VALUES ('Produto 9',  'Descrição do Produto 9', 900.00);
+INSERT INTO Produtos (nome, descricao, valor) VALUES ('Produto 10', 'Descrição do Produto 10', 1000.00);
 
 INSERT INTO ItemEstoque (idProduto, idEstoque, quantidadeAtual, quantidadeMax) VALUES (1, 1, 15, 30);
 INSERT INTO ItemEstoque (idProduto, idEstoque, quantidadeAtual, quantidadeMax) VALUES (2, 1, 10, 10);
