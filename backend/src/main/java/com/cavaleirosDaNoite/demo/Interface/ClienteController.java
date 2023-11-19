@@ -1,5 +1,6 @@
 package com.cavaleirosDaNoite.demo.Interface;
 
+import com.cavaleirosDaNoite.demo.Aplicacao.ClienteRequest;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Cliente;
 import com.cavaleirosDaNoite.demo.Dominio.ServicoCliente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,10 @@ public class ClienteController {
 
     @PostMapping
     @CrossOrigin("*")
-    public ResponseEntity<String> postCliente(@RequestBody Cliente cliente) {
+    public ResponseEntity<?> postCliente(@RequestBody ClienteRequest clienteRequest) {
         try {
-            Cliente clienteSalvo = servicoCliente.cadastrarCliente(cliente);
-            return ResponseEntity.ok(clienteSalvo.toString());
+            Cliente clienteSalvo = servicoCliente.cadastrarCliente(clienteRequest);
+            return ResponseEntity.ok(clienteSalvo);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao cadastrar cliente: " + e.getMessage());
         }
@@ -45,23 +46,16 @@ public class ClienteController {
 
     @PutMapping("/{id}")
     @CrossOrigin("*")
-    public ResponseEntity<String> putCliente(@RequestBody Cliente cliente, @PathVariable long id) {
-        Cliente clienteExistente = servicoCliente.buscarCliente(id);
-
-        if (clienteExistente != null) {
-            // Copiar os dados atualizados para o cliente existente
-            clienteExistente.setNome(cliente.getNome());
-            clienteExistente.setCpf(cliente.getCpf());
-            clienteExistente.setEmail(cliente.getEmail());
-            clienteExistente.setSenha(cliente.getSenha());
-
-            // Atualizar o cliente no banco de dados
-            servicoCliente.atualizarCliente(clienteExistente);
-
-            return ResponseEntity.ok("Cliente Atualizado com Sucesso!");
-        } else {
-            // Cliente não encontrado
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> putCliente(@RequestBody ClienteRequest clienteRequest, @PathVariable long id) {
+        try{
+            Cliente clienteAtualizado = servicoCliente.atualizarCliente(clienteRequest, id);
+            if (clienteAtualizado != null) {
+                return ResponseEntity.ok(clienteAtualizado);
+            } else {
+                return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body("Cliente não encontrado!");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar cliente: " + e.getMessage());
         }
     }
 

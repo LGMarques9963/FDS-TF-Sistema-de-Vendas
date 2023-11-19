@@ -2,6 +2,7 @@ package com.cavaleirosDaNoite.demo.Dominio;
 
 import java.util.List;
 
+import com.cavaleirosDaNoite.demo.Aplicacao.ClienteRequest;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,9 @@ public class ServicoCliente {
     }
 
 
-    public Cliente cadastrarCliente(Cliente cliente) {
-        repClientes.save(cliente);
-        return cliente;
+    public Cliente cadastrarCliente(ClienteRequest clienteRequest) {
+        Cliente cliente = new Cliente(clienteRequest.getNome(), clienteRequest.getCpf(), clienteRequest.getEmail(), clienteRequest.getSenha());
+        return repClientes.save(cliente);
     }
 
     public void removerCliente(long id) {
@@ -33,7 +34,17 @@ public class ServicoCliente {
         return repClientes.findById(id).orElse(null);
     }
 
-    public void atualizarCliente(Cliente cliente) {
-        repClientes.save(cliente);
+    public Cliente atualizarCliente(ClienteRequest clienteRequest, long id) {
+        Cliente clienteExistente = repClientes.findById(id).orElse(null);
+        if (clienteExistente != null) {
+            // Copiar os dados atualizados para o cliente existente
+            clienteExistente.setNome(clienteRequest.getNome());
+            clienteExistente.setCpf(clienteRequest.getCpf());
+            clienteExistente.setEmail(clienteRequest.getEmail());
+            clienteExistente.setSenha(clienteRequest.getSenha());
+            return repClientes.save(clienteExistente);
+        } else {
+            return null;
+        }
     }
 }
