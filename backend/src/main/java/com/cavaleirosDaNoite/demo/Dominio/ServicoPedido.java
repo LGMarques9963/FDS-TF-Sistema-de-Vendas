@@ -21,11 +21,14 @@ public class ServicoPedido {
     private final ServicoCliente servicoCliente;
     private final ServicoProduto servicoProduto;
 
+    private final ServicoItemPedido servicoItemPedido;
+
     @Autowired
-    public ServicoPedido(RepPedidos repPedidos, ServicoCliente servicoCliente, ServicoProduto servicoProduto) {
+    public ServicoPedido(RepPedidos repPedidos, ServicoCliente servicoCliente, ServicoProduto servicoProduto, ServicoItemPedido servicoItemPedido) {
         this.repPedidos = repPedidos;
         this.servicoCliente = servicoCliente;
         this.servicoProduto = servicoProduto;
+        this.servicoItemPedido = servicoItemPedido;
     }
 
     @Transactional
@@ -66,6 +69,13 @@ public class ServicoPedido {
         Cliente cliente = servicoCliente.buscarCliente(pedidoRequest.getIdCliente());
         Pedido pedidoAtualizado = repPedidos.findById(idPedido).orElse(null);
         Date data = new Date();
+        if (pedidoAtualizado == null) {
+            return null;
+        }
+        pedidoAtualizado.getItens().forEach(item -> item.setPedido(null));
+        pedidoAtualizado.clearItens();
+        //        pedidoAtualizado.getItens().stream().map(item -> { item.setPedido(null); return servicoItemPedido.atualizarItemPedido(item); });
+//        pedidoAtualizado.clearItens();
         List<ItemPedido> itensPedido = pedidoRequest.getItens().stream()
                 .map(itemRequest -> {
                     Produto produto = servicoProduto.buscarProduto(itemRequest.getIdProduto());
@@ -73,10 +83,8 @@ public class ServicoPedido {
                     // Adicione a linha abaixo para configurar a associação bidirecional
                     itemPedido.setPedido(pedidoAtualizado);
                     return itemPedido;
-                }).collect(Collectors.toList());
-        if (pedidoAtualizado == null) {
-            return null;
-        }
+                })
+                .collect(Collectors.toList());
         pedidoAtualizado.setData(data);
         pedidoAtualizado.setCliente(cliente);
         pedidoAtualizado.updateItens(itensPedido);

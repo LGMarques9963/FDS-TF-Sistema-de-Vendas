@@ -58,6 +58,7 @@ public class Pedido {
 
     public void updateItens(List<ItemPedido> itensPedido) {
         this.itens.clear();
+        System.out.println("Itens do pedido: " + this.itens);
         System.out.println("Itens do pedido: " + itensPedido);
         this.itens.addAll(itensPedido);
         System.out.println("Itens do pedido: " + this.itens);
@@ -69,6 +70,10 @@ public class Pedido {
 
     public void setData(Date data) {
         this.data = data;
+    }
+
+    public void clearItens() {
+        this.itens.clear();
     }
 
 
