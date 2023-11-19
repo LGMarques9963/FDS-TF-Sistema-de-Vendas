@@ -40,10 +40,7 @@ public class ServicoPedido {
         List<ItemPedido> itensPedido = pedidoRequest.getItens().stream()
                 .map(itemRequest -> {
                     Produto produto = servicoProduto.buscarProduto(itemRequest.getIdProduto());
-                    ItemPedido itemPedido = new ItemPedido(produto, itemRequest.getQuantidade());
-                    // Adicione a linha abaixo para configurar a associação bidirecional
-                    itemPedido.setPedido(pedido);
-                    return itemPedido;
+                    return new ItemPedido(produto, itemRequest.getQuantidade(), pedido);
                 }).toList();
         pedido.setItens(itensPedido);
         return repPedidos.save(pedido);
@@ -70,26 +67,18 @@ public class ServicoPedido {
         Cliente cliente = servicoCliente.buscarCliente(pedidoRequest.getIdCliente());
         Pedido pedidoAtualizado = repPedidos.findById(idPedido).orElse(null);
         Date data = new Date();
-        if (pedidoAtualizado == null) {
-            return null;
-        }
+        if (pedidoAtualizado == null) { return null; }
         pedidoAtualizado.getItens().forEach(item -> item.setPedido(null));
         pedidoAtualizado.clearItens();
-        //        pedidoAtualizado.getItens().stream().map(item -> { item.setPedido(null); return servicoItemPedido.atualizarItemPedido(item); });
-//        pedidoAtualizado.clearItens();
         List<ItemPedido> itensPedido = pedidoRequest.getItens().stream()
                 .map(itemRequest -> {
                     Produto produto = servicoProduto.buscarProduto(itemRequest.getIdProduto());
-                    ItemPedido itemPedido = new ItemPedido(produto, itemRequest.getQuantidade());
-                    // Adicione a linha abaixo para configurar a associação bidirecional
-                    itemPedido.setPedido(pedidoAtualizado);
-                    return itemPedido;
+                    return new ItemPedido(produto, itemRequest.getQuantidade(), pedidoAtualizado);
                 })
                 .collect(Collectors.toList());
         pedidoAtualizado.setData(data);
         pedidoAtualizado.setCliente(cliente);
         pedidoAtualizado.updateItens(itensPedido);
-        System.out.println("Pedido atualizado: " + pedidoAtualizado);
         return repPedidos.save(pedidoAtualizado);
     }
 }

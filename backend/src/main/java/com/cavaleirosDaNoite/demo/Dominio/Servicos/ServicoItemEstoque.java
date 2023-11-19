@@ -1,9 +1,8 @@
-package com.cavaleirosDaNoite.demo.Dominio;
+package com.cavaleirosDaNoite.demo.Dominio.Servicos;
 
+import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepItemEstoque;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.cavaleirosDaNoite.demo.Dominio.Entidades.Estoque;
-import com.cavaleirosDaNoite.demo.Dominio.Entidades.Produto;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.ItemEstoque;
 
 

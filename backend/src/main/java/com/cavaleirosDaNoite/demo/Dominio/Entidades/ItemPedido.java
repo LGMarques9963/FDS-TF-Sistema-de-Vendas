@@ -29,9 +29,10 @@ public class ItemPedido {
         this.pedido = pedido;
     }
 
-    public ItemPedido(Produto produto, int quantidade) {
+    public ItemPedido(Produto produto, int quantidade, Pedido pedido) {
         this.produto = produto;
         this.quantidade = quantidade;
+        this.pedido = pedido;
         produto.adicionarItemPedido(this);
     }
 

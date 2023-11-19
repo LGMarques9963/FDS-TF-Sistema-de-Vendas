@@ -20,18 +20,18 @@ public class Produto {
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private ItemEstoque itemEstoque;
+    private List<ItemEstoque> itemEstoque;
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<ItemPedido> itensPedido;
 
-    public Produto(long id, String nome, String descricao, double valor, ItemEstoque itemEstoque) {
+    public Produto(long id, String nome, String descricao, double valor, List<ItemEstoque> itemEstoque) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.valor = valor;
-        this.itemEstoque = itemEstoque;
+        this.itemEstoque = (itemEstoque != null) ? itemEstoque : new ArrayList<>();
     }
 
     public Produto(String nome, String descricao, double valor) {
@@ -41,6 +41,8 @@ public class Produto {
     }
 
     protected Produto() {
+        this.itemEstoque = new ArrayList<>();
+        this.itensPedido = new ArrayList<>();
     }
 
     public long getId() {
@@ -59,12 +61,8 @@ public class Produto {
         return valor;
     }
 
-    public ItemEstoque getItemEstoque(){
+    public List<ItemEstoque> getItemEstoque(){
         return itemEstoque;
-    }
-
-    public long getIdItemEstoque(){
-        return itemEstoque.getId();
     }
 
     public void setNome(String nome){
@@ -79,7 +77,7 @@ public class Produto {
         this.valor = valor;
     }
 
-    public void setItemEstoquestoque(ItemEstoque itemEstoque){
+    public void setItemEstoque(List<ItemEstoque> itemEstoque){
         this.itemEstoque = itemEstoque;
     }
 
@@ -99,16 +97,29 @@ public class Produto {
         itemPedido.setProduto(this);
     }
 
+    public void adicionarItemEstoque(ItemEstoque itemEstoque){
+        if (this.itemEstoque == null){
+            this.setItemEstoque(new ArrayList<>());
+        }
+        this.itemEstoque.add(itemEstoque);
+        itemEstoque.setProduto(this);
+    }
+
+    public void updateItemEstoque(List<ItemEstoque> itemEstoque){
+        if (this.itemEstoque == null){
+            this.setItemEstoque(new ArrayList<>());
+        }
+        this.itemEstoque.clear();
+        this.itemEstoque.addAll(itemEstoque);
+    }
+
     public void removerItemPedido(ItemPedido itemPedido){
         itensPedido.remove(itemPedido);
         itemPedido.setProduto(null);
     }
 
-
-    @Override
     public String toString() {
-        return "Produto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", valor=" + valor + ", ]";
+        return "Produto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", valor=" + valor + "]";
     }
-
 
 }
