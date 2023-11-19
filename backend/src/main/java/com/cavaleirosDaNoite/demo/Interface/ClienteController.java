@@ -63,7 +63,7 @@ public class ClienteController {
     public ResponseEntity<?> deleteCliente(@PathVariable long id) {
         try{
             servicoCliente.removerCliente(id);
-            return ResponseEntity.ok("Cliente removido com sucesso!");  
+            return ResponseEntity.ok("Cliente removido com sucesso!");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao remover cliente: " + e.getMessage());
         }

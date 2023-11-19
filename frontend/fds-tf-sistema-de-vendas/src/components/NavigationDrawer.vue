@@ -16,15 +16,17 @@
             <v-divider></v-divider>
 
             <v-list dense>
-                <v-list-item v-for="item in items" :key="item.title" link>
-                    <v-list-item-icon>
-                        <v-icon>{{ item.icon }}</v-icon>
-                    </v-list-item-icon>
+                <router-link v-for="item in items" :key="item.title" :to="item.path" tag="div" class="router-link">
+                    <v-list-item>
+                        <v-list-item-icon>
+                            <v-icon>{{ item.icon }}</v-icon>
+                        </v-list-item-icon>
 
-                    <v-list-item-content>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
+                        <v-list-item-content>
+                            <v-list-item-title>{{ item.title }}</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </router-link>
             </v-list>
         </v-navigation-drawer>
     </v-card>
@@ -38,14 +40,23 @@ export default {
         drawer: true,
         mini: false,
         items: [
-            { title: "Clientes", icon: "mdi-inbox" },
-            { title: "Produtos", icon: "mdi-inbox-arrow-up" },
-            { title: "Pedidos", icon: "mdi-heart" },
-            { title: "Orcamentos", icon: "mdi-archive" },
-            { title: "Estatisticas", icon: "mdi-trash-can" },
+            { title: "Clientes", icon: "mdi-inbox", path: "/clientes" },
+            { title: "Produtos", icon: "mdi-inbox-arrow-up", path: "/produtos" },
+            { title: "Pedidos", icon: "mdi-heart", path: "/pedidos" },
+            { title: "Orcamentos", icon: "mdi-archive", path: "/orcamentos" },
+            { title: "Estatisticas", icon: "mdi-trash-can", path: "/estatisticas" },
         ],
     }),
 }
 </script>
 
-<style></style>
+<style scoped>
+.router-link {
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Adiciona uma transição suave de 0.3 segundos */
+}
+
+.router-link:hover {
+  background-color: #cfd8dc; /* Cor de fundo ao passar o mouse */
+}
+</style>
