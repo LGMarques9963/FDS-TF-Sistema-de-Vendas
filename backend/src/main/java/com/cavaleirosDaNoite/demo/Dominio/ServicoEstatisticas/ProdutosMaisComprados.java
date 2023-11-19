@@ -1,21 +1,17 @@
 package com.cavaleirosDaNoite.demo.Dominio.ServicoEstatisticas;
 
-import com.cavaleirosDaNoite.demo.Dominio.RepOrcamentos;
-import com.cavaleirosDaNoite.demo.Dominio.RepProdutos;
-import com.cavaleirosDaNoite.demo.Dominio.Entidades.ItemPedido;
+import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepOrcamentos;
+import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepProdutos;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Orcamento;
-import com.cavaleirosDaNoite.demo.Dominio.Entidades.Pedido;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Produto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import java.util.*;
 import java.util.stream.Collectors;
 
 @Service

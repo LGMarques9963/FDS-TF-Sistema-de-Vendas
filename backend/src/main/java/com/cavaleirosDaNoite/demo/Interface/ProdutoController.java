@@ -2,7 +2,7 @@ package com.cavaleirosDaNoite.demo.Interface;
 
 import com.cavaleirosDaNoite.demo.Aplicacao.ProdutoRequest;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Produto;
-import com.cavaleirosDaNoite.demo.Dominio.ServicoProduto;
+import com.cavaleirosDaNoite.demo.Dominio.Servicos.ServicoProduto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

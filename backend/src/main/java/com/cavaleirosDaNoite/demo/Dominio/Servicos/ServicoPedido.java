@@ -1,10 +1,11 @@
-package com.cavaleirosDaNoite.demo.Dominio;
+package com.cavaleirosDaNoite.demo.Dominio.Servicos;
 
 import com.cavaleirosDaNoite.demo.Aplicacao.PedidoRequest;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Cliente;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.ItemPedido;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Pedido;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Produto;
+import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepPedidos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

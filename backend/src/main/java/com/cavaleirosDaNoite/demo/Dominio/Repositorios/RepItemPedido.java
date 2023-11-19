@@ -1,4 +1,4 @@
-package com.cavaleirosDaNoite.demo.Dominio;
+package com.cavaleirosDaNoite.demo.Dominio.Repositorios;
 
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.ItemPedido;
 import com.cavaleirosDaNoite.demo.Persistencia.dao_interfaces.IRepItemPedido;

@@ -1,4 +1,4 @@
-package com.cavaleirosDaNoite.demo.Dominio;
+package com.cavaleirosDaNoite.demo.Dominio.Repositorios;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Pedido;
 import com.cavaleirosDaNoite.demo.Persistencia.dao_interfaces.IRepPedido;
 import org.springframework.beans.factory.annotation.Autowired;

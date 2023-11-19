@@ -1,8 +1,7 @@
 package com.cavaleirosDaNoite.demo.Interface;
 
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Orcamento;
-import com.cavaleirosDaNoite.demo.Dominio.RepOrcamentos;
-import com.cavaleirosDaNoite.demo.Dominio.ServicoOrcamento;
+import com.cavaleirosDaNoite.demo.Dominio.Servicos.ServicoOrcamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -58,9 +57,9 @@ public class OrcamentoController {
 
     @PutMapping("/{id}")
     @CrossOrigin("*")
-    public ResponseEntity<String> efetivarOrcamento(@PathVariable long id) {
+    public ResponseEntity<?> efetivarOrcamento(@PathVariable long id) {
         try{
-            return ResponseEntity.ok(servicoOrcamento.efetivarOrcamento(id).toString());
+            return ResponseEntity.ok(servicoOrcamento.efetivarOrcamento(id));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Erro ao efetivar orçamento: Orcamento não encontrado");
         }

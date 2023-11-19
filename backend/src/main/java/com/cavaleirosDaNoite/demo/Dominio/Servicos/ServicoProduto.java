@@ -1,11 +1,11 @@
-package com.cavaleirosDaNoite.demo.Dominio;
+package com.cavaleirosDaNoite.demo.Dominio.Servicos;
 
 import com.cavaleirosDaNoite.demo.Aplicacao.ProdutoRequest;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Estoque;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Produto;
-import jakarta.persistence.Entity;
+import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepEstoque;
+import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepProdutos;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,9 +1,10 @@
-package com.cavaleirosDaNoite.demo.Dominio;
+package com.cavaleirosDaNoite.demo.Dominio.Servicos;
 
 import java.util.List;
 
 import com.cavaleirosDaNoite.demo.Aplicacao.ClienteRequest;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Cliente;
+import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepClientes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,16 +1,11 @@
 package com.cavaleirosDaNoite.demo.Interface;
 
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Cliente;
-import com.cavaleirosDaNoite.demo.Dominio.Entidades.Orcamento;
-import com.cavaleirosDaNoite.demo.Dominio.Entidades.Pedido;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Produto;
 import com.cavaleirosDaNoite.demo.Dominio.ServicoEstatisticas.ClientesInadiplentes;
 import com.cavaleirosDaNoite.demo.Dominio.ServicoEstatisticas.MesesMaisVendas;
 import com.cavaleirosDaNoite.demo.Dominio.ServicoEstatisticas.ProdutosMaisComprados;
-import com.cavaleirosDaNoite.demo.Dominio.RepOrcamentos;
-import com.cavaleirosDaNoite.demo.Dominio.ServicoOrcamento;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Month;

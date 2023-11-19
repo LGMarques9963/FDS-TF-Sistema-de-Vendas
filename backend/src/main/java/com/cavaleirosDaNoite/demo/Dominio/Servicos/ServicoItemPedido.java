@@ -1,6 +1,9 @@
-package com.cavaleirosDaNoite.demo.Dominio;
+package com.cavaleirosDaNoite.demo.Dominio.Servicos;
 
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.ItemPedido;
+import com.cavaleirosDaNoite.demo.Dominio.Entidades.Pedido;
+import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepItemPedido;
+import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepPedidos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +13,12 @@ import java.util.List;
 public class ServicoItemPedido {
     RepItemPedido repItemPedido;
 
+    RepPedidos repPedidos;
+
     @Autowired
-    public ServicoItemPedido(RepItemPedido repItemPedido) {
+    public ServicoItemPedido(RepItemPedido repItemPedido, RepPedidos repPedido) {
         this.repItemPedido = repItemPedido;
+        this.repPedidos = repPedido;
     }
 
     public void cadastrarItemPedido(ItemPedido itemPedido) {
@@ -34,5 +40,14 @@ public class ServicoItemPedido {
 
     public List<ItemPedido> listarItemPedido() {
         return (List<ItemPedido>) repItemPedido.findAll();
+    }
+
+    public double calcularSomatorioItensPedido(long id) {
+        Pedido pedido = repPedidos.findById(id).orElse(null);
+        if (pedido == null) {
+            return 0;
+        }
+        return pedido.getItens().stream().mapToDouble(itemPedido -> itemPedido.getValor() * itemPedido.getQuantidade())
+                .sum();
     }
 }
