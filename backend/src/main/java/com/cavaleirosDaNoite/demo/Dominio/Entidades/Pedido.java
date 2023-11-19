@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -15,13 +17,13 @@ public class Pedido {
     private long id;
     private Date data;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<ItemPedido> itens;
 
     @ManyToOne
     @JoinColumn(name = "idCliente")
-    @JsonManagedReference
+    @JsonBackReference
     private Cliente cliente;
 
     public Pedido(Date data, Cliente cliente, List<ItemPedido> itens) {
@@ -46,19 +48,43 @@ public class Pedido {
         return itens;
     }
 
-    public void adicionarItem(ItemPedido item) {
-        itens.add(item);
-        item.setPedido(this);
-    }
-
-    public void removerItem(ItemPedido item) {
-        itens.remove(item);
-        item.setPedido(null);
-    }
-
-
     public Cliente getCliente() {
         return cliente;
     }
 
+    public void setItens(List<ItemPedido> itensPedido) {
+        this.itens = itensPedido;
+    }
+
+    public void updateItens(List<ItemPedido> itensPedido) {
+        this.itens.clear();
+        System.out.println("Itens do pedido: " + this.itens);
+        System.out.println("Itens do pedido: " + itensPedido);
+        this.itens.addAll(itensPedido);
+        System.out.println("Itens do pedido: " + this.itens);
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public void clearItens() {
+        this.itens.clear();
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id +
+                ", data=" + data +
+                ", itens=" + itens +
+                ", cliente=" + cliente +
+                '}';
+    }
 }

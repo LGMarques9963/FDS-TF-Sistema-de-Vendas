@@ -33,7 +33,7 @@ public class RepOrcamentos {
     }
 
     public List<Orcamento> findByClienteId(long idCliente) {  // Procurar pela Id do cliente
-        return (List<Orcamento>) orcamentoRepository.findByClienteId(idCliente);
+        return orcamentoRepository.findByClienteId(idCliente);
     }
 
 

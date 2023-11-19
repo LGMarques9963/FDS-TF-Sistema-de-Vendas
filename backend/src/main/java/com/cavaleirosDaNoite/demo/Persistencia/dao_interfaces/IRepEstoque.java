@@ -6,8 +6,7 @@ import com.cavaleirosDaNoite.demo.Dominio.Entidades.Estoque;
 
 import java.util.List;
 
-public interface
-IRepEstoque extends CrudRepository<Estoque, Long> {
+public interface IRepEstoque extends CrudRepository<Estoque, Long> {
 
     List<Estoque> findByQuantidadeLessThan(int minQuant);
 }
