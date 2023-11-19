@@ -2,9 +2,12 @@ package com.cavaleirosDaNoite.demo.Dominio.Servicos;
 
 import com.cavaleirosDaNoite.demo.Dominio.CalculadoraDescontoValidade;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Cliente;
+import com.cavaleirosDaNoite.demo.Dominio.Entidades.ItemEstoque;
+import com.cavaleirosDaNoite.demo.Dominio.Entidades.ItemPedido;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Orcamento;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Pedido;
 
+import com.cavaleirosDaNoite.demo.Dominio.RepItemEstoque;
 import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepOrcamentos;
 import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepPedidos;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,7 @@ public class ServicoOrcamento {
     CalculadoraDescontoValidade calculadora;
     RepPedidos repPedidos;
     RepOrcamentos repOrcamentos;
-
+    RepItemEstoque repItemEstoque;
     ServicoItemPedido servicoItemPedido;
 
     @Autowired
@@ -70,7 +73,6 @@ public class ServicoOrcamento {
         return orcamentos.stream()
                 .filter(orcamento -> calculadora.calcularPrazoValidade(orcamento).isAfter(LocalDate.now()))
                 .collect(Collectors.toList());
-
     }
 
     public List<Orcamento> orcamentosCliente(long idCliente) {
@@ -83,9 +85,32 @@ public class ServicoOrcamento {
 
     public Orcamento efetivarOrcamento(long idOrcamento){
         Orcamento orcamento = repOrcamentos.findById(idOrcamento).orElse(null);
-        orcamento.setEfetivado(true);
-        repOrcamentos.save(orcamento);
+        List<ItemPedido> itemPedido = orcamento.getPedido().getItens();
+        List<Boolean> lista = itemPedido.stream().map(item -> {
+            int qtdeEstoque = item.getProduto().getItemEstoque().getQuantidadeAtual();
+            int qtdePedido = item.getQuantidade();
+            return qtdeEstoque >= qtdePedido;
+        }).collect(Collectors.toList());
+        if (lista.contains(false)){
+            throw new RuntimeException("Quantidade de produtos insuficiente no estoque");
+        } else {
+            itemPedido.stream().map(item -> {
+                int qtdeEstoque = item.getProduto().getItemEstoque().getQuantidadeAtual();
+                int qtdePedido = item.getQuantidade();
+                int qtdeAtualizada = qtdeEstoque - qtdePedido;
+                ItemEstoque itemEstoqueAtualizado = item.getProduto().getItemEstoque();
+                itemEstoqueAtualizado.setQuantidadeAtual(qtdeAtualizada);
+                repItemEstoque.save(itemEstoqueAtualizado);
+                return itemEstoqueAtualizado;
+            }).collect(Collectors.toList());
+            orcamento.setEfetivado(true);
+            repOrcamentos.save(orcamento);
+        }
         return orcamento;
+        
+        // orcamento.setEfetivado(true);
+        // repOrcamentos.save(orcamento);
+        // return orcamento;
     }
 
     public List<Orcamento> listarOrcamentos() {

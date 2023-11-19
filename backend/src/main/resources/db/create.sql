@@ -27,6 +27,16 @@ CREATE TABLE IF NOT EXISTS Produtos (
     FOREIGN KEY (idEstoque) REFERENCES Estoques(id)
 );
 
+CREATE TABLE IF NOT EXISTS ItemEstoque (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    idProduto BIGINT NOT NULL,
+    idEstoque BIGINT NOT NULL,
+    quantidadeAtual INT NOT NULL,
+    quantidadeMax INT NOT NULL,
+    FOREIGN KEY (idProduto) REFERENCES Produtos(id),
+    FOREIGN KEY (idEstoque) REFERENCES Estoques(id)
+);
+
 CREATE TABLE IF NOT EXISTS Pedidos (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     data DATE NOT NULL,

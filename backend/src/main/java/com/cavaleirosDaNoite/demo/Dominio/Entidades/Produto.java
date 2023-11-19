@@ -18,21 +18,20 @@ public class Produto {
     private String descricao;
     private double valor;
 
-    @ManyToOne
-    @JoinColumn(name = "idEstoque")
-    @JsonBackReference
-    private Estoque estoque;
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private ItemEstoque itemEstoque;
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<ItemPedido> itensPedido;
 
-    public Produto(long id, String nome, String descricao, double valor, Estoque estoque) {
+    public Produto(long id, String nome, String descricao, double valor, ItemEstoque itemEstoque) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.valor = valor;
-        this.estoque = estoque;
+        this.itemEstoque = itemEstoque;
     }
 
     public Produto(String nome, String descricao, double valor) {
@@ -60,12 +59,12 @@ public class Produto {
         return valor;
     }
 
-    public Estoque getEstoque(){
-        return estoque;
+    public ItemEstoque getItemEstoque(){
+        return itemEstoque;
     }
 
-    public long getIdEstoque(){
-        return estoque.getId();
+    public long getIdItemEstoque(){
+        return itemEstoque.getId();
     }
 
     public void setNome(String nome){
@@ -80,8 +79,8 @@ public class Produto {
         this.valor = valor;
     }
 
-    public void setEstoque(Estoque estoque){
-        this.estoque = estoque;
+    public void setItemEstoquestoque(ItemEstoque itemEstoque){
+        this.itemEstoque = itemEstoque;
     }
 
     public void setItensPedido(List<ItemPedido> itensPedido){
