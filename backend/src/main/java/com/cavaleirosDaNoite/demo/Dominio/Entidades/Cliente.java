@@ -22,8 +22,7 @@ public class Cliente {
     @JsonManagedReference
     private List<Pedido> pedidos;
 
-    public Cliente(long id, String nome, String cpf, String email, String senha) {
-        this.id = id;
+    public Cliente(String nome, String cpf, String email, String senha) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
