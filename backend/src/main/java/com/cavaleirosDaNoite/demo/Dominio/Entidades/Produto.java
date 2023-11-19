@@ -34,6 +34,12 @@ public class Produto {
         this.itemEstoque = itemEstoque;
     }
 
+    public Produto(String nome, String descricao, double valor) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.valor = valor;
+    }
+
     protected Produto() {
     }
 

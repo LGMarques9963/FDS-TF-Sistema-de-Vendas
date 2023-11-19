@@ -1,11 +1,15 @@
-package com.cavaleirosDaNoite.demo.Dominio;
+package com.cavaleirosDaNoite.demo.Dominio.Servicos;
 
+import com.cavaleirosDaNoite.demo.Dominio.CalculadoraDescontoValidade;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Cliente;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.ItemEstoque;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.ItemPedido;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Orcamento;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Pedido;
 
+import com.cavaleirosDaNoite.demo.Dominio.RepItemEstoque;
+import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepOrcamentos;
+import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepPedidos;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -21,19 +25,25 @@ public class ServicoOrcamento {
     RepPedidos repPedidos;
     RepOrcamentos repOrcamentos;
     RepItemEstoque repItemEstoque;
-    
+    ServicoItemPedido servicoItemPedido;
+
     @Autowired
-    public ServicoOrcamento(CalculadoraDescontoValidade calculadora, RepPedidos repPedidos, RepOrcamentos repOrcamentos) {
+    public ServicoOrcamento(CalculadoraDescontoValidade calculadora, RepPedidos repPedidos,
+            RepOrcamentos repOrcamentos, ServicoItemPedido servicoItemPedido) {
         this.calculadora = calculadora;
         this.repPedidos = repPedidos;
         this.repOrcamentos = repOrcamentos;
+        this.servicoItemPedido = servicoItemPedido;
     }
     
     public Orcamento solicitarOrcamento(long idPedido){
         Pedido pedido = repPedidos.findById(idPedido).orElse(null);
+        if (pedido == null) {
+            return null;
+        }
         Cliente cliente = pedido.getCliente();
         double imposto = 0.10;
-        double valorPedido = calcularSomatorioItensPedido(pedido.getId());
+        double valorPedido = servicoItemPedido.calcularSomatorioItensPedido(pedido.getId());
         double desconto = calculadora.calcularDesconto(valorPedido, cliente);
         double valorFinal = valorPedido - (valorPedido * imposto) - desconto;
         LocalDate data = LocalDate.now();
@@ -48,31 +58,28 @@ public class ServicoOrcamento {
         return repOrcamentos.save(orcamento);
     }
 
-    public double calcularSomatorioItensPedido(long id){
-        Pedido pedido = repPedidos.findById(id).orElse(null);
-        double somatorio = pedido.getItens().stream().mapToDouble(ItemPedido::getValor).sum();
-        return somatorio;
-    }
 
-    public List<Orcamento> orcamentosVencidos(){
+
+    public List<Orcamento> orcamentosVencidos() {
         List<Orcamento> orcamentos = repOrcamentos.findAll();
-        return orcamentos.stream().filter(orcamento -> calculadora.calcularPrazoValidade(orcamento)
-        .isBefore(LocalDate.now())).collect(Collectors.toList());
+        return orcamentos.stream()
+                .filter(orcamento -> calculadora.calcularPrazoValidade(orcamento).isBefore(LocalDate.now()))
+                .collect(Collectors.toList());
 
     }
 
-    public List<Orcamento> orcamentosValidos(){
+    public List<Orcamento> orcamentosValidos() {
         List<Orcamento> orcamentos = repOrcamentos.findAll();
-        return orcamentos.stream().filter(orcamento -> calculadora.calcularPrazoValidade(orcamento)
-        .isAfter(LocalDate.now())).collect(Collectors.toList());
-
+        return orcamentos.stream()
+                .filter(orcamento -> calculadora.calcularPrazoValidade(orcamento).isAfter(LocalDate.now()))
+                .collect(Collectors.toList());
     }
 
-    public List<Orcamento> orcamentosCliente(long idCliente){
+    public List<Orcamento> orcamentosCliente(long idCliente) {
         return repOrcamentos.findByClienteId(idCliente);
     }
 
-    public Orcamento buscarOrcamento(long id){
+    public Orcamento buscarOrcamento(long id) {
         return repOrcamentos.findById(id).orElse(null);
     }
 
@@ -106,9 +113,8 @@ public class ServicoOrcamento {
         // return orcamento;
     }
 
-    public List<Orcamento> listarOrcamentos(){
+    public List<Orcamento> listarOrcamentos() {
         return repOrcamentos.findAll();
     }
-    
+
 }
- 

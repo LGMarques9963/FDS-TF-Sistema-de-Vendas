@@ -2,12 +2,12 @@ package com.cavaleirosDaNoite.demo.Dominio.Desconto;
 
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Cliente;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Orcamento;
-import com.cavaleirosDaNoite.demo.Dominio.RepOrcamentos;
+import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepOrcamentos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
+
 @Component
 public class DescontoNumeroComprasStrategy implements DescontoStrategy {
     @Autowired

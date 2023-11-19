@@ -1,7 +1,8 @@
 package com.cavaleirosDaNoite.demo.Interface;
 
+import com.cavaleirosDaNoite.demo.Aplicacao.ProdutoRequest;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Produto;
-import com.cavaleirosDaNoite.demo.Dominio.ServicoProduto;
+import com.cavaleirosDaNoite.demo.Dominio.Servicos.ServicoProduto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,10 +38,10 @@ public class ProdutoController {
 
     @PostMapping
     @CrossOrigin("*")
-    public ResponseEntity<String> postProduto(@RequestBody Produto produto, @RequestParam long idEstoque) {
+    public ResponseEntity<?> postProduto(@RequestBody ProdutoRequest produtoRequest) {
         try {
-            Produto produtoAtualizado = servicoProduto.cadastrarProduto(produto, idEstoque);
-            return ResponseEntity.ok(produtoAtualizado.toString());
+            Produto produtoAtualizado = servicoProduto.cadastrarProduto(produtoRequest);
+            return ResponseEntity.ok(produtoAtualizado);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Erro ao cadastrar produto: " + e.getMessage());
         }
@@ -48,10 +49,10 @@ public class ProdutoController {
 
     @PutMapping("/{id}")
     @CrossOrigin("*")
-    public ResponseEntity<String> putProduto(@RequestBody Produto produto, @PathVariable long id, @RequestParam long idEstoque) {
+    public ResponseEntity<?> putProduto(@RequestBody ProdutoRequest produtoRequest, @PathVariable long id) {
         try {
-            Produto produtoAtualizado = servicoProduto.atualizarProduto(produto, idEstoque, id);
-            return ResponseEntity.ok(produtoAtualizado.toString());
+            Produto produtoAtualizado = servicoProduto.atualizarProduto(produtoRequest, id);
+            return ResponseEntity.ok(produtoAtualizado);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Erro ao cadastrar produto: " + e.getMessage());
         }

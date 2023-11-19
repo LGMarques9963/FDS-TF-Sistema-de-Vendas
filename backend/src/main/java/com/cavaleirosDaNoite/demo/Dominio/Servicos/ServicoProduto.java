@@ -1,10 +1,11 @@
-package com.cavaleirosDaNoite.demo.Dominio;
+package com.cavaleirosDaNoite.demo.Dominio.Servicos;
 
+import com.cavaleirosDaNoite.demo.Aplicacao.ProdutoRequest;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Estoque;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Produto;
-import jakarta.persistence.Entity;
+import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepEstoque;
+import com.cavaleirosDaNoite.demo.Dominio.Repositorios.RepProdutos;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,8 +23,9 @@ public class ServicoProduto {
         this.repEstoque = repEstoque;
     }
 
-    public Produto cadastrarProduto(Produto produto, long idEstoque){
-        Estoque estoque = repEstoque.findById(idEstoque).orElse(null);
+    public Produto cadastrarProduto(ProdutoRequest produtoRequest){
+        Estoque estoque = repEstoque.findById(produtoRequest.getIdEstoque()).orElse(null);
+        Produto produto = new Produto(produtoRequest.getNome(), produtoRequest.getDescricao(), produtoRequest.getValor());
         produto.setEstoque(estoque);
         repProdutos.save(produto);
         return produto;
@@ -33,20 +35,21 @@ public class ServicoProduto {
         repProdutos.deleteById(produto.getId());
     }
 
-    public Produto atualizarProduto(Produto produto, long idEstoque, long idProduto){
-        Estoque estoque = repEstoque.findById(idEstoque).orElse(null);
+    public Produto atualizarProduto(ProdutoRequest produtoRequest, long idProduto){
+        Estoque estoque = repEstoque.findById(produtoRequest.getIdEstoque()).orElse(null);
         Produto produtoAtualizado = repProdutos.findById(idProduto).orElse(null);
 
-        produtoAtualizado.setValor(produto.getValor());
-        produtoAtualizado.setNome(produto.getNome());
-        produtoAtualizado.setDescricao(produto.getDescricao());
+        if (produtoAtualizado == null) { return null; }
+
+        produtoAtualizado.setValor(produtoRequest.getValor());
+        produtoAtualizado.setNome(produtoRequest.getNome());
+        produtoAtualizado.setDescricao(produtoRequest.getDescricao());
         produtoAtualizado.setEstoque(estoque);
         repProdutos.save(produtoAtualizado);
         return produtoAtualizado;
 
     }
 
-    @EntityGraph(attributePaths = {"estoque", "estoque.quantidade"})
     public Produto buscarProduto(long id){
         return repProdutos.findById(id).orElse(null);
     }
