@@ -20,6 +20,9 @@ public class ProdutosMaisComprados {
     RepProdutos repProdutos;
     RepOrcamentos repOrcamentos;
 
+    // metodo que percorre todos os orcamentos efetivados pegando os produtos e suas
+    // quantidades compradas e ordenando em uma lista
+
     @Autowired
     public ProdutosMaisComprados(RepProdutos repProdutos, RepOrcamentos repOrcamentos) {
         this.repOrcamentos = repOrcamentos;
