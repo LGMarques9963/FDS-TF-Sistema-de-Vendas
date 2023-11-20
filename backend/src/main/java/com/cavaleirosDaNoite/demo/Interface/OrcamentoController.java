@@ -49,9 +49,9 @@ public class OrcamentoController {
         return servicoOrcamento.orcamentosCliente(id);
     }
 
-    @PostMapping
+    @PostMapping("/gerar/{idPedido}")
     @CrossOrigin("*")
-    public Orcamento saveOrcamento(@RequestParam long idPedido) {
+    public Orcamento saveOrcamento(@PathVariable long idPedido) {
         return servicoOrcamento.solicitarOrcamento(idPedido);
     }
 

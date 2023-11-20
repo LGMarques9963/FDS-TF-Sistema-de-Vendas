@@ -34,19 +34,19 @@ const routes = [
     path: "/pedidos",
     name: "pedidos",
     component: () =>
-      import(/* webpackChunkName: "produtos" */ "../views/PedidosView.vue"),
+      import(/* webpackChunkName: "pedidos" */ "../views/PedidosView.vue"),
   },
   {
     path: "/orcamentos",
     name: "orcamentos",
     component: () =>
-      import(/* webpackChunkName: "produtos" */ "../views/OrcamentosView.vue"),
+      import(/* webpackChunkName: "orcamentos" */ "../views/OrcamentosView.vue"),
   },
   {
-    path: "/estisticas",
+    path: "/estatisticas",
     name: "estatisticas",
     component: () =>
-      import(/* webpackChunkName: "produtos" */ "../views/EstatisticasView.vue"),
+      import(/* webpackChunkName: "estatisticas" */ "../views/EstatisticasView.vue"),
   }
 ];
 

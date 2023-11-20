@@ -3,10 +3,10 @@
         <v-navigation-drawer v-model="drawer" :mini-variant.sync="mini" permanent>
             <v-list-item class="px-2">
                 <v-list-item-avatar>
-                    <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
+                    <v-app-bar-nav-icon></v-app-bar-nav-icon>
                 </v-list-item-avatar>
 
-                <v-list-item-title>John Leider</v-list-item-title>
+                <v-list-item-title>Menu</v-list-item-title>
 
                 <v-btn icon @click.stop="mini = !mini">
                     <v-icon>mdi-chevron-left</v-icon>
@@ -40,11 +40,11 @@ export default {
         drawer: true,
         mini: false,
         items: [
-            { title: "Clientes", icon: "mdi-inbox", path: "/clientes" },
-            { title: "Produtos", icon: "mdi-inbox-arrow-up", path: "/produtos" },
-            { title: "Pedidos", icon: "mdi-heart", path: "/pedidos" },
-            { title: "Orcamentos", icon: "mdi-archive", path: "/orcamentos" },
-            { title: "Estatisticas", icon: "mdi-trash-can", path: "/estatisticas" },
+            { title: "Clientes", icon: "mdi-account-group", path: "/clientes" },
+            { title: "Produtos", icon: "mdi-cart", path: "/produtos" },
+            { title: "Pedidos", icon: "mdi-basket", path: "/pedidos" },
+            { title: "Orcamentos", icon: "mdi-wallet", path: "/orcamentos" },
+            { title: "Estatisticas", icon: "mdi-chart-multiple", path: "/estatisticas" },
         ],
     }),
 }
