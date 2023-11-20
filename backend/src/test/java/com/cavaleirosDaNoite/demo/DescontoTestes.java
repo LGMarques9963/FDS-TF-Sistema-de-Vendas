@@ -32,15 +32,6 @@ public class DescontoTestes {
     @Autowired
     ServicoCliente servicoCliente;
 
-    @Autowired
-    ServicoOrcamento servicoOrcamento;
-
-    @Autowired
-    ServicoPedido servicoPedido;
-
-    @Autowired
-    ServicoItemPedido servicoItemPedido;
-
     @BeforeEach
     public void setup() {
 
@@ -52,7 +43,7 @@ public class DescontoTestes {
     @Test
     public void testaDescontoComprasMenor10() {
 
-        Cliente clienteTest = servicoCliente.buscarCliente(22);
+        Cliente clienteTest = servicoCliente.buscarCliente(2);
 
         double val = calculaDesconto.calcularDesconto(0, clienteTest);
 
@@ -69,7 +60,7 @@ public class DescontoTestes {
     @Test
     public void testaDescontoComprasMaior10() {
 
-        Cliente clienteTest = servicoCliente.buscarCliente(21);
+        Cliente clienteTest = servicoCliente.buscarCliente(1);
 
         double val = calculaDesconto.calcularDesconto(0, clienteTest);
 
@@ -86,7 +77,7 @@ public class DescontoTestes {
     @Test
     public void testaDescontoComprasIgual10() {
 
-        Cliente clienteTest = servicoCliente.buscarCliente(23);
+        Cliente clienteTest = servicoCliente.buscarCliente(3);
 
         double val = calculaDesconto.calcularDesconto(0, clienteTest);
 
