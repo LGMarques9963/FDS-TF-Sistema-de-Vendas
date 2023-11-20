@@ -103,6 +103,40 @@
                     </div>
                 </v-expand-transition>
             </v-card>
+            <v-card class="mx-auto">
+
+                <v-card-title>
+                    Clientes Inadiplentes
+                </v-card-title>
+
+                <v-card-actions>
+                    <v-btn color="orange lighten-2" text @click="showInadiplentes = !showInadiplentes">
+                        Visualizar
+
+
+                        <v-spacer></v-spacer>
+
+
+                        <v-icon>{{ showInadiplentes ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                    </v-btn>
+                </v-card-actions>
+
+                <v-expand-transition>
+                    <div v-show="showInadiplentes">
+                        <v-list>
+                            <v-list-item-group v-for="cliente in clientesInadiplentes" :key="cliente.id">
+                                <v-list-item>
+                                    <v-list-item-content>
+                                        <v-list-item-title>Cliente: {{ cliente.nome }}</v-list-item-title>
+                                        <v-list-item-subtitle>Email: {{ cliente.email }}</v-list-item-subtitle>
+                                        <v-list-item-subtitle>Quantidade de Pedidos: {{ calcularQuantidadePedidos(cliente) }}</v-list-item-subtitle>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </v-list-item-group>
+                        </v-list>
+                    </div>
+                </v-expand-transition>
+            </v-card>
         </v-row>
     </v-container>
 </template>
@@ -114,8 +148,10 @@ export default {
     data: () => ({
         showMaisComprados: false,
         showMaisVendas: false,
+        showInadiplentes: false,
         produtosMaisComprados: [],
         mesesComMaisVendas: {},
+        clientesInadiplentes: [],
     }),
 
     methods: {
@@ -151,13 +187,30 @@ export default {
                     alert("Erro ao buscar meses com mais vendas")
                     console.log(error);
                 });
-        }
+        },
+
+        getClientesInadiplentes() {
+            this.$http
+                .get("/estatisticas/clientesInadiplentes")
+                .then((response) => {
+                    this.clientesInadiplentes = response.data;
+                })
+                .catch((error) => {
+                    alert("Erro ao buscar clientes inadiplentes")
+                    console.log(error);
+                });
+        },
+
+        calcularQuantidadePedidos(cliente) {
+            return cliente.pedidos.length;
+        },
 
     },
 
     mounted() {
         this.getProdutosMaisComprados();
         this.getMesesComMaisVendas();
+        this.getClientesInadiplentes();
     },
 
 }
