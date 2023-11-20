@@ -1,7 +1,6 @@
 package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 

@@ -45,13 +45,13 @@ public class ServicoOrcamento {
         double imposto = 0.10;
         double valorPedido = servicoItemPedido.calcularSomatorioItensPedido(pedido.getId());
         double desconto = calculadora.calcularDesconto(valorPedido, cliente);
-        double valorFinal = valorPedido - (valorPedido * imposto) - desconto;
+        double valorFinal = valorPedido + (valorPedido * imposto) - desconto;
         LocalDate data = LocalDate.now();
         Orcamento orcamento = new Orcamento();
-        orcamento.setValorTotal(valorPedido);
+        orcamento.setValorTotal(valorFinal);
         orcamento.setCliente(cliente);
         orcamento.setPedido(pedido);
-        orcamento.setData(LocalDate.now());
+        orcamento.setData(data);
         orcamento.setImposto(imposto);
         orcamento.setDesconto(desconto);
         orcamento.setEfetivado(false);
@@ -98,10 +98,9 @@ public class ServicoOrcamento {
                 int qtdeEstoque = item.getProduto().getItemEstoque().stream().map(itemEstoque -> itemEstoque.getQuantidadeAtual()).findFirst().orElse(null);
                 int qtdePedido = item.getQuantidade();
                 int qtdeAtualizada = qtdeEstoque - qtdePedido;
-                item.getProduto().getItemEstoque().stream().map(itemEstoque -> {
+                item.getProduto().getItemEstoque().forEach(itemEstoque -> {
                     itemEstoque.setQuantidadeAtual(qtdeAtualizada);
                     repItemEstoque.save(itemEstoque);
-                    return itemEstoque;
                 });
                 return null;
             });
@@ -109,10 +108,6 @@ public class ServicoOrcamento {
             repOrcamentos.save(orcamento);
         }
         return orcamento;
-        
-        // orcamento.setEfetivado(true);
-        // repOrcamentos.save(orcamento);
-        // return orcamento;
     }
 
     public List<Orcamento> listarOrcamentos() {

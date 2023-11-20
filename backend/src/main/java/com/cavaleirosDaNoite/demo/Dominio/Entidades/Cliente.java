@@ -1,9 +1,7 @@
 package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 
 import java.util.List;
-import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
