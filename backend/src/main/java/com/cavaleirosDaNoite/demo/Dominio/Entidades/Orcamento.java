@@ -1,8 +1,6 @@
 package com.cavaleirosDaNoite.demo.Dominio.Entidades;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 

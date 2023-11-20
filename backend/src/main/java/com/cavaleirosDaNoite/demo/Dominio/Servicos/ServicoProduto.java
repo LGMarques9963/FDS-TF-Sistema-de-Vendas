@@ -1,6 +1,5 @@
 package com.cavaleirosDaNoite.demo.Dominio.Servicos;
 
-import com.cavaleirosDaNoite.demo.Aplicacao.ItemEstoqueRequest;
 import com.cavaleirosDaNoite.demo.Aplicacao.ProdutoRequest;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.Estoque;
 import com.cavaleirosDaNoite.demo.Dominio.Entidades.ItemEstoque;
