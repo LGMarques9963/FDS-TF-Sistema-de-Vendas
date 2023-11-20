@@ -19,6 +19,8 @@ public class ClientesInadiplentes {
     RepOrcamentos reporcamentos;
     RepClientes repClientes;
 
+    // retorna uma lista contendo os clientes que possuem orcamentos não efetivados
+
     @Autowired
     public ClientesInadiplentes(RepOrcamentos repOrcamentos, RepClientes repClientes) {
         this.reporcamentos = repOrcamentos;

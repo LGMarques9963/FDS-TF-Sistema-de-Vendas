@@ -6,7 +6,6 @@ import com.cavaleirosDaNoite.demo.Dominio.Entidades.Orcamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.time.Month;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -15,6 +14,9 @@ import java.util.stream.Collectors;
 public class MesesMaisVendas {
 
     RepOrcamentos repOrcamentos;
+
+    // Metodo que vasculha por todos os orcamentos efetivados e retorna uma lista
+    // ordenada pela quantidade de compras realizas naquele mes
 
     @Autowired
     public MesesMaisVendas(RepOrcamentos repOrcamentos) {
@@ -28,11 +30,10 @@ public class MesesMaisVendas {
                         orcamento -> orcamento.getData().getMonth(),
                         Collectors.counting()));
 
-        Map<Month, Long> mesesComVendas = new EnumMap<>(Month.class);
-        for (Month mes : Month.values()) {
-            Long quantidade = vendasPorMes.getOrDefault(mes, 0L);
-            mesesComVendas.put(mes, quantidade);
-        }
+        Map<Month, Long> mesesComVendas = new LinkedHashMap<>();
+        vendasPorMes.entrySet().stream()
+                .sorted(Map.Entry.<Month, Long>comparingByValue().reversed())
+                .forEachOrdered(entry -> mesesComVendas.put(entry.getKey(), entry.getValue()));
 
         return mesesComVendas;
     }
