@@ -64,3 +64,7 @@ npm run build
 ```
 
 Os arquivos de build serão gerados no diretório `dist/`.
+
+## Teste do Backend
+
+Para testar o backend, importe a coleçao TF-Sistema-Vendas.postman_collection.json para o Postman e execute as requisições
