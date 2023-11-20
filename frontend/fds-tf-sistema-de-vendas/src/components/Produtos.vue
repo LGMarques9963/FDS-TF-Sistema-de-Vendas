@@ -212,6 +212,7 @@ export default {
                     this.produtos = response.data;
                 })
                 .catch((error) => {
+                    alert("Erro ao listar produtos")
                     console.log(error);
                 });
         },
@@ -228,6 +229,7 @@ export default {
                     this.formData.itemEstoque[0].quantidadeMax = produto.itemEstoque[0].quantidadeMax;
                 })
                 .catch((error) => {
+                    alert("Erro ao buscar produto")
                     console.log(error);
                 });
         },
@@ -238,8 +240,10 @@ export default {
                 .then((response) => {
                     this.getProdutos();
                     this.addDialog = false;
+                    alert("Produto adicionado com sucesso!")
                 })
                 .catch((error) => {
+                    alert("Erro ao adicionar produto")
                     console.log(error);
                 });
         },
@@ -251,8 +255,10 @@ export default {
                 .then((response) => {
                     this.getProdutos();
                     this.editDialog = false;
+                    alert("Produto editado com sucesso!")
                 })
                 .catch((error) => {
+                    alert("Erro ao editar produto")
                     console.log(error);
                 });
         },
@@ -264,8 +270,10 @@ export default {
                 .then((response) => {
                     this.getProdutos();
                     this.remove = false;
+                    alert("Produto removido com sucesso!")
                 })
                 .catch((error) => {
+                    alert("Erro ao remover produto")
                     console.log(error);
                 });
         },

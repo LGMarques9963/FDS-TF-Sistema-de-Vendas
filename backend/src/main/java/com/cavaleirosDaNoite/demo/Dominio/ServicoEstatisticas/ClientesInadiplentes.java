@@ -8,6 +8,7 @@ import com.cavaleirosDaNoite.demo.Dominio.Entidades.Orcamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 import java.util.stream.Collectors;
@@ -25,10 +26,12 @@ public class ClientesInadiplentes {
 
     }
 
-    public Map<Cliente, Long> clientesInadiplentes() {
+    public List<Cliente> clientesInadimplentes() {
         return reporcamentos.findAll().stream()
                 .filter(orcamento -> !orcamento.isEfetivado())
-                .collect(Collectors.groupingBy(Orcamento::getCliente, Collectors.counting()));
+                .map(Orcamento::getCliente)
+                .distinct()
+                .collect(Collectors.toList());
     }
 
 }

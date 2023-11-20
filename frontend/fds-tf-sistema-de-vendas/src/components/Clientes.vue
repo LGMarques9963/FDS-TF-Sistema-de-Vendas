@@ -103,6 +103,49 @@
       </v-dialog>
     </div>
 
+    <!-- Adicionar Pedido -->
+    <div class="tex-center">
+      <v-dialog v-model="addDialogPedido" persistent max-width="600px">
+        <v-card>
+          <v-card-title>
+            <span class="text-h5">Adicionar Pedido</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field v-model="clienteAddPedido.nome" label="Cliente" disabled
+                    :value="clienteAddPedido.nome"></v-text-field>
+                </v-col>
+                <v-row v-for="(item, index) in formPedido.itens" :key="index">
+                  <v-col cols="12" sm="6">
+                    <v-select :items="produtos" v-model="item.idProduto" label="Produto" item-text="idProduto"
+                      prefix="Produto " required></v-select>
+
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field v-model="item.quantidade" label="Quantidade" required></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-row>
+            </v-container>
+            <v-btn @click="adicionarLinha">Adicionar Produto</v-btn>
+            <small>*Indica um campo obrigatório</small>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="addDialogPedido = false">
+              Close
+            </v-btn>
+            <v-btn color="blue darken-1" text @click="addProdutos">
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
+
+
     <!-- Clientes-->
     <v-expansion-panels accordion focusable inset>
       <v-toolbar dark>
@@ -164,6 +207,9 @@
               </v-list-item>
               <v-divider inset></v-divider>
             </v-list>
+            <v-card-action>
+              <v-btn text @click="openAdicionarPedido(cliente.id)">Adicionar Pedido</v-btn>
+            </v-card-action>
           </v-card>
         </v-expansion-panel-content>
       </v-expansion-panel>
@@ -183,7 +229,23 @@ export default {
     editDialog: false,
     addDialog: false,
     idEdit: null,
+    addDialogPedido: false,
+    produtos: [],
     formData: {
+      nome: "",
+      cpf: "",
+      email: "",
+      senha: "",
+    },
+    formPedido: {
+      idCliente: "",
+      itens: [{
+        idProduto: "",
+        quantidade: "",
+      }]
+    },
+    clienteAddPedido: {
+      id: "",
       nome: "",
       cpf: "",
       email: "",
@@ -199,6 +261,7 @@ export default {
           this.clientes = response.data;
         })
         .catch((error) => {
+          alert("Erro ao listar clientes");
           console.log(error);
         })
         .finally(() => {
@@ -217,11 +280,20 @@ export default {
           this.formData.senha = cliente.senha;
         })
         .catch((error) => {
+          alert("Erro ao buscar cliente");
           console.log(error);
         })
         .finally(() => {
           this.loading = false;
         })
+    },
+
+    adicionarLinha() {
+      this.formPedido.itens.push({ idProduto: "", quantidade: "" });
+    },
+
+    limparItemPedido() {
+      this.formData.itemPedido = [{ produto: "", quantidade: "" }];
     },
 
     addClientes() {
@@ -230,10 +302,11 @@ export default {
       this.$http
         .post("/clientes", this.formData)
         .then((response) => {
-          alert(response.data);
+          alert("Cliente adicionado com sucesso");
           this.getClientes();
         })
         .catch((error) => {
+          alert("Erro ao adicionar cliente");
           console.log(error);
         })
         .finally(() => {
@@ -248,10 +321,45 @@ export default {
       this.$http
         .put(`/clientes/${id}`, this.formData)
         .then((response) => {
-          alert(response.data);
+          alert("Cliente editado com sucesso");
           this.getClientes();
         })
         .catch((error) => {
+          alert("Erro ao editar cliente");
+          console.log(error);
+        })
+        .finally(() => {
+          this.loading = false;
+        })
+    },
+
+    getProdutos() {
+      this.$http
+        .get("/produtos")
+        .then((response) => {
+          const apiResponse = response.data;
+          this.produtos = apiResponse.map(produto => produto.id);
+          // this.produtos = response.data;
+        })
+        .catch((error) => {
+          alert("Erro ao listar produtos");
+          console.log(error);
+        })
+        .finally(() => {
+        })
+    },
+
+    addProdutos() {
+      this.addDialogPedido = false;
+      this.loading = true;
+      this.$http
+        .post("/pedidos", this.formPedido)
+        .then((response) => {
+          alert("Pedido adicionado com sucesso");
+          this.getClientes();
+        })
+        .catch((error) => {
+          alert("Erro ao adicionar pedido");
           console.log(error);
         })
         .finally(() => {
@@ -274,6 +382,34 @@ export default {
       this.addDialog = true;
     },
 
+    openAdicionarPedido(id) {
+      this.formPedido.idCliente = id;
+      this.getClientePedido(id);
+      this.getProdutos();
+      this.addDialogPedido = true;
+    },
+
+    getClientePedido(id) {
+      this.loading = true;
+      this.$http
+        .get(`/clientes/${id}`)
+        .then((response) => {
+          const cliente = response.data;
+          this.clienteAddPedido.id = cliente.id;
+          this.clienteAddPedido.nome = cliente.nome;
+          this.clienteAddPedido.cpf = cliente.cpf;
+          this.clienteAddPedido.email = cliente.email;
+          this.clienteAddPedido.senha = cliente.senha;
+        })
+        .catch((error) => {
+          alert("Erro ao buscar cliente");
+          console.log(error);
+        })
+        .finally(() => {
+          this.loading = false;
+        })
+    },
+
     deleteClientes() {
       this.remove = false;
       this.loading = true;
@@ -281,11 +417,11 @@ export default {
       this.$http
         .delete(`/clientes/${id}`)
         .then((response) => {
-          alert(response.data);
+          alert("Cliente removido com sucesso");
           this.getClientes();
         })
         .catch((error) => {
-          alert(error.response.data);
+          alert("Erro ao remover cliente");
           console.log(error);
         })
         .finally(() => {

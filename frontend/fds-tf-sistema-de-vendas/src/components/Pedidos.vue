@@ -25,6 +25,7 @@
             </v-dialog>
         </div>
 
+        
         <!-- Listar Pedidos-->
         <v-expansion-panels accordion focusable inset>
             <v-toolbar dark>
@@ -107,6 +108,7 @@ export default {
                     this.pedidos = res.data;
                 })
                 .catch((err) => {
+                    alert("Erro ao listar pedidos")
                     console.log(err);
                 });
         },
@@ -119,6 +121,7 @@ export default {
                     this.formData.itens = res.data.itens;
                 })
                 .catch((err) => {
+                    alert("Erro ao buscar pedido")
                     console.log(err);
                 });
         },
@@ -129,8 +132,10 @@ export default {
                 .then((res) => {
                     this.getPedidos();
                     this.remove = false;
+                    alert("Pedido removido com sucesso!")
                 })
                 .catch((err) => {
+                    alert("Erro ao remover pedido")
                     console.log(err);
                 });
         },
@@ -141,8 +146,10 @@ export default {
                 .then((res) => {
                     this.getPedidos();
                     this.addDialog = false;
+                    alert("Pedido adicionado com sucesso!")
                 })
                 .catch((err) => {
+                    alert("Erro ao adicionar pedido")
                     console.log(err);
                 });
 
@@ -154,12 +161,14 @@ export default {
                 .then((res) => {
                     this.getPedidos();
                     this.editDialog = false;
+                    alert("Pedido atualizado com sucesso!")
                 })
                 .catch((err) => {
+                    alert("Erro ao atualizar pedido")
                     console.log(err);
                 });
         },
-        
+
         gerarOrcamento(id) {
             this.$http
                 .post("/orcamento/gerar/" + id)
@@ -167,6 +176,7 @@ export default {
                     alert("Orçamento gerado com sucesso!")
                 })
                 .catch((err) => {
+                    alert("Erro ao gerar orçamento")
                     console.log(err);
                 });
         },

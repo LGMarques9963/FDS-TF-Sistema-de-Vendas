@@ -94,6 +94,7 @@ export default {
                     this.orcamentos = res.data;
                 })
                 .catch((err) => {
+                    alert("Erro ao listar os orçamentos!")
                     console.log(err);
                 });
         },
@@ -106,6 +107,7 @@ export default {
                     this.getOrcamentos();
                 })
                 .catch((err) => {
+                    alert("Erro ao efetivar o orçamento!")
                     console.log(err);
                 });
         },

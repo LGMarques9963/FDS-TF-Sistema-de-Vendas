@@ -30,8 +30,8 @@ public class EstatisticasController {
 
     @GetMapping("/clientesInadiplentes")
     @CrossOrigin("*")
-    public Map<Cliente, Long> clientesInadiplentes() {
-        return clientesInadiplentes.clientesInadiplentes();
+    public List<Cliente> clientesInadiplentes() {
+        return clientesInadiplentes.clientesInadimplentes();
     }
 
     @GetMapping("/mesesMaisVendas")

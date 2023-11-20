@@ -126,6 +126,7 @@ export default {
                     this.produtosMaisComprados = response.data;
                 })
                 .catch((error) => {
+                    alert("Erro ao buscar produtos mais comprados")
                     console.log(error);
                 });
         },
@@ -147,6 +148,7 @@ export default {
                     this.mesesComMaisVendas = sortedObject;
                 })
                 .catch((error) => {
+                    alert("Erro ao buscar meses com mais vendas")
                     console.log(error);
                 });
         }
