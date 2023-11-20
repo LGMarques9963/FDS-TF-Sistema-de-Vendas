@@ -68,3 +68,8 @@ Os arquivos de build serão gerados no diretório `dist/`.
 ## Teste do Backend
 
 Para testar o backend, importe a coleçao TF-Sistema-Vendas.postman_collection.json para o Postman e execute as requisições
+
+## Testes unitários
+
+Para a realização dos teste unitários, substituir no arquivo application.properties a linha "spring.sql.init.data-locations=classpath*:db/insert.sql"
+pela linha contendo os inserts de test "spring.sql.init.data-locations=classpath*:db/insertTests.sql"
