@@ -1,75 +1,79 @@
-# FDS-TF-Sistema-de-Vendas
+# Sales System
 
-Este repositório contém o código-fonte para o backend e frontend do projeto final da Disciplina de Fundamentos de Desenvolvimento de Software.
+## Description
+This project was developed as the final assignment for the **Fundamentals of Software Development** course. The goal is to create a **complete sales system** for an online store, handling **product management, inventory control, budget generation, and sales analysis**. The system is designed with **scalability, maintainability, and adaptability** in mind, incorporating **design patterns and clean architecture principles**.
 
-## Backend
+## Features
+- **Product Management**: Add, update, and delete products with detailed attributes (code, description, price, and stock levels).
+- **Budget Generation**: Create custom budgets for customers, including items, costs, taxes, discounts, and final amounts.
+- **Discount Strategies**: Implement discount policies based on customers' purchase history and seasonal periods.
+- **Budget Validity**: Define specific expiration dates for budgets.
+- **Statistical Analysis**: Provide insights into sales trends using a statistical module.
+- **Inventory Control**: Efficiently manage stock across multiple storage locations.
 
-### Pré-requisitos
+## System Architecture
+The system follows the **Clean Architecture** principles to ensure modularity and maintainability. It consists of the following layers:
 
-- Java Development Kit (JDK) 17 ou superior
-- Maven
+1. **Domain Layer**: Contains entities and interfaces representing the core business logic.
+2. **Application Layer**: Manages system requests and orchestrates business operations.
+3. **Infrastructure Layer**: Handles database access and external dependencies.
+4. **Interface Layer (Controllers)**: Manages user interaction and API endpoints.
 
-### Configuração
+Additionally, the system implements the **Strategy Pattern** for flexible discount calculations, allowing easy modifications without altering the core logic.
 
-1. **Clone o repositório:**
+## Technologies Used
+- **Backend**:
+  - Language: Java
+  - Framework: Spring Boot
+  - Dependency Management: Maven
+  - Database: [Specify database, e.g., PostgreSQL, MySQL]
 
-    ```bash
-    git clone https://github.com/LGMarques9963/FDS-TF-Sistema-de-Vendas.git
-    cd FDS-TF-Sistema-de-Vendas/backend
-    ```
+- **Frontend**:
+  - Language: JavaScript
+  - Framework/Library: Vue.JS
+  - Package Management: npm
 
-2. **Execute o seguinte comando para construir e executar o backend:**
+## Installation & Execution
+### Backend
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/LGMarques9963/FDS-TF-Sistema-de-Vendas.git
+   cd FDS-TF-Sistema-de-Vendas/backend
+   ```
+2. Build and run the backend:
+   ```sh
+   mvn install
+   mvn spring-boot:run
+   ```
+   The backend will be available at `http://localhost:8080`.
 
-    ```bash
-    mvn install
-    mvn spring-boot:run
-    ```
+### Frontend
+1. Navigate to the frontend directory:
+   ```sh
+   cd ../frontend/fds-tf-sistema-de-venda
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Start the frontend:
+   ```sh
+   npm run serve
+   ```
+   The frontend will be available at `http://localhost:8081`.
 
-    O backend estará disponível em `http://localhost:8080`.
+## Usage
+Once both the backend and frontend are running, users can access the system to:
+- Manage products and stock levels.
+- Generate and manage customer budgets.
+- Apply dynamic discount policies.
+- View statistical insights on sales performance.
 
-## Frontend
+## Contributors
+- Eduardo Kumiechick
+- Lavinia Winter
+- Lorran Marques
+- Pedro Henrique Reis
 
-### Pré-requisitos
-
-- Node.js (com npm)
-
-### Configuração
-
-1. **Navegue até o diretório do frontend:**
-
-    ```bash
-    cd FDS-TF-Sistema-de-Vendas/frontend
-    ```
-
-2. **Instale as dependências:**
-
-    ```bash
-    npm install
-    ```
-
-3. **Execute o seguinte comando para iniciar o servidor de desenvolvimento:**
-
-    ```bash
-    npm run serve
-    ```
-
-    O frontend estará disponível em `http://localhost:8081`.
-
-### Build para Produção
-
-Para construir o frontend para produção, execute o seguinte comando:
-
-```bash
-npm run build
-```
-
-Os arquivos de build serão gerados no diretório `dist/`.
-
-## Teste do Backend
-
-Para testar o backend, importe a coleçao TF-Sistema-Vendas.postman_collection.json para o Postman e execute as requisições
-
-## Testes unitários
-
-Para a realização dos teste unitários, substituir no arquivo application.properties a linha "spring.sql.init.data-locations=classpath*:db/insert.sql"
-pela linha contendo os inserts de test "spring.sql.init.data-locations=classpath*:db/insertTests.sql"
+## License
+This project is for educational purposes and does not include a specific license.
