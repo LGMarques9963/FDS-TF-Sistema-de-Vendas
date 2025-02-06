@@ -1,4 +1,4 @@
-# Sales System
+# VentaPro
 
 ## Description
 This project was developed as the final assignment for the **Fundamentals of Software Development** course. The goal is to create a **complete sales system** for an online store, handling **product management, inventory control, budget generation, and sales analysis**. The system is designed with **scalability, maintainability, and adaptability** in mind, incorporating **design patterns and clean architecture principles**.
